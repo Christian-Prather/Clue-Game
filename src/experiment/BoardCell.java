@@ -6,7 +6,8 @@ public class BoardCell {
 	
 	public BoardCell(int x, int y)
 	{
-		this.row = x;
-		this.column = y;
+		// Flipped for programmer preference
+		this.column = x;
+		this.row = y;
 	}
 }
