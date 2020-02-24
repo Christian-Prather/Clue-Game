@@ -1,6 +1,12 @@
 package experiment;
 
 public class BoardCell {
-	int row;
-	int column;
+	public int row;
+	public int column;
+	
+	public BoardCell(int x, int y)
+	{
+		this.row = x;
+		this.column = y;
+	}
 }

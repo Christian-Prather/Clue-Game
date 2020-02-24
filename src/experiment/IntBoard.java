@@ -7,6 +7,10 @@ public class IntBoard {
  	private Map<BoardCell, Set<BoardCell>> adjacent = new HashMap<BoardCell, Set<BoardCell>>();
 	
 
+ 	public IntBoard()
+ 	{
+ 		super();
+ 	}
 	public IntBoard(Set<BoardCell> cells) {
 		super();
 		this.cells = cells;
@@ -29,6 +33,11 @@ public class IntBoard {
 	public Set<BoardCell> getTargets()
 	{
 		return null;
+	}
+	
+	public BoardCell getCell(int x, int y)
+	{
+		return new BoardCell(x,y);
 	}
 	
 }	
