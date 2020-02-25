@@ -85,11 +85,48 @@ public class IntBoard {
 	public void calcTargets(BoardCell startCell, int pathLength)
 	{
 		
+		visited.add(startCell);
+		Set<BoardCell> adjCells = getAdjList(startCell);
+		
+		for(BoardCell eachCell : adjCells) {
+			
+			if(!visited.contains(eachCell))
+			{
+				visited.add(eachCell);
+				if(pathLength == 1)
+				{
+					targets.add(eachCell);
+				}
+				else
+				{
+					calcTargets(eachCell, pathLength -1);
+				}
+				visited.remove(eachCell);
+			}
+			
+			
+			
+//			
+//			if(pathLength == 1 ) {
+//				targets.add(eachCell);
+//			}if(!visited.contains(eachCell)) {
+//				visited.add(eachCell);
+//			}else {
+//				calcTargets(eachCell, pathLength - 1);
+//			}if(pathLength != 1) {
+//				visited.remove(eachCell);
+//			}
+		
+		}
+//		for(BoardCell eachCell: adjCells) {
+//			visited.remove(eachCell);
+//		}
 	}
 	
 	public Set<BoardCell> getTargets()
 	{
-		return null;
+		
+		return targets;
 	}
 	
 	public BoardCell getCell(int x, int y)
