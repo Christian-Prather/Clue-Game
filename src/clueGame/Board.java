@@ -44,5 +44,11 @@ public class Board
 	{
 		
 	}
+	public void setConfigs(String boardConfig, String legend)
+	{
+		this.boardConfigFile = boardConfig;
+		this.legend = legend;
+		
+	}
 
 }
