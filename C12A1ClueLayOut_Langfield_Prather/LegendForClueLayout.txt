@@ -1,0 +1,11 @@
+K, Kindnessroom, Card
+R, RepositoryRoom, Card
+L, Library, Card
+O, Observatory, Card
+J, Jumping Jack Room, Card
+P, Punching Room, Card
+G, Gaming Room, Card
+X, Xylophone Room, Card
+S, Sexy Room, Card
+Q, Closet, Other
+Y, Walkway, Other
