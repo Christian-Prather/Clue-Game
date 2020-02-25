@@ -12,6 +12,15 @@ public class IntBoard {
  	public IntBoard()
  	{
  		super();
+ 		for (int i = 0; i < grid.length; i++) // Column
+		{
+			for (int j = 0; j < grid[0].length; j++) // ROW
+			{
+				BoardCell tempCell = new BoardCell(i,j);
+				//gameBoard.add(tempCell);
+				grid[i][j] = tempCell;
+			}
+		}
  		calcAdjacencies();
  		for(Map.Entry<BoardCell, Set<BoardCell>> entry : adjacent.entrySet())
  		{
@@ -29,9 +38,10 @@ public class IntBoard {
 	{
 		// Calcs adjacents and saves to Map adjacent
 		// For every cell in cells (do check logic and push into map)
-		for (int i = 0; i < grid.length -1; i++)
+		System.out.println("GRID DIMENSIONS " + "ROW " + grid.length + "Column " + grid[0].length);
+		for (int i = 0; i < grid.length; i++)
 		{
-			for (int j = 0; j < grid[0].length -1; j++)
+			for (int j = 0; j < grid[0].length; j++)
 			{
 				//BoardCell keyCell = getCell(grid[i][j]);
 				Set<BoardCell> adjacencies = new HashSet<BoardCell>();
@@ -47,12 +57,12 @@ public class IntBoard {
 					//BoardCell tempCell = getCell(grid[i][j].column, grid[i][j].row -1);
 					adjacencies.add(grid[i][j-1]);
 				}
-				if (grid[i][j].row != grid[1].length)
+				if (grid[i][j].row != grid[1].length -1)
 				{
 					//BoardCell tempCell = getCell(grid[i][j].column, grid[i][j].row + 1);
 					adjacencies.add(grid[i][j+1]);
 				}
-				if (grid[i][j].column != grid[0].length)
+				if (grid[i][j].column != grid[0].length -1)
 				{
 				//	BoardCell tempCell = getCell(grid[i][j].column +1, grid[i][j].row);
 					adjacencies.add(grid[i + 1][j]);
@@ -91,15 +101,7 @@ public class IntBoard {
 	{
 		System.out.println("Here");
 		//Set<BoardCell> gameBoard = new HashSet<BoardCell>();
-		for (int i = 0; i < grid.length; i++)
-		{
-			for (int j = 0; j < grid[0].length; j++)
-			{
-				BoardCell tempCell = new BoardCell(i,j);
-				//gameBoard.add(tempCell);
-				grid[i][j] = tempCell;
-			}
-		}
+	
 		
 		IntBoard board = new IntBoard();
 		BoardCell cell = board.getCell(0,0);
@@ -111,10 +113,8 @@ public class IntBoard {
 
 		Set<BoardCell> testList = board.getAdjList(cell);
 		System.out.println("SIZE:" + testList.size());
-		for (BoardCell item : testList)
-		{
-			System.out.println("Cell" + item);
-		}
+		System.out.println("LIST:" + testList);
+
 		
 
 	}

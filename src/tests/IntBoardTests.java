@@ -24,9 +24,10 @@ public class IntBoardTests
 	public void testAdjacency0() 
 	{
 		beforeAll();
-		//board = new IntBoard();
+//		board = new IntBoard();
+		//IntBoard board = new IntBoard();
 
-		System.out.println("I HATE JAVA");
+
 
 		BoardCell cell = board.getCell(0,0);
 		System.out.println(cell);
