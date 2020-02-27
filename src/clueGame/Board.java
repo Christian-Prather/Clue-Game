@@ -8,12 +8,13 @@ public class Board
 	private int numRows;
 	private int numColumns;
 	public int MAX_BOARD_SIZE = 50;
-	private Board boardCell[][];
+	private BoardCell board[][];
 	private Map<Character, String> legend;
+	private String legendConfig;
 	private Map<BoardCell, Set<BoardCell>> adjjMatrix;
 	private Set<BoardCell> targets;
 	private String boardConfigFile;
-	private String roomConfigFile;
+	//private String roomConfigFile;
 	private static Board theInstance = new Board();
 
 	
@@ -26,6 +27,7 @@ public class Board
 	
 	public void initalize()
 	{
+		
 		
 	}
 	public void loadRoomConfig()
@@ -44,11 +46,33 @@ public class Board
 	{
 		
 	}
-	public void setConfigs(String boardConfig, String legend)
+	public void setConfigs(String boardConfig, String legendConfig)
 	{
 		this.boardConfigFile = boardConfig;
-		this.legend = legend;
+		this.legendConfig = legendConfig;
 		
+	}
+	public Map<Character, String> getLegend()
+	{
+		return legend;
+	}
+	public BoardCell getCellAt(int column, int row)
+	{
+		return board[column][row];
+	}
+	
+	public int getNumberOfRows()
+	{
+		return numRows;
+	}
+	public int getNumberOfColumns()
+	{
+		return numColumns;
+	}
+	
+	public Character getInitail()
+	{
+		return null;
 	}
 
 }

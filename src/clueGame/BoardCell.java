@@ -27,5 +27,12 @@ public class BoardCell {
 	{
 		return null;
 	}
-	
+	public DoorDirection getDoorDirection()
+	{
+		return null;
+	}
+	public Character getInitial()
+	{
+		return null;
+	}
 }
