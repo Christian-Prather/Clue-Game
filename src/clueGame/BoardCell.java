@@ -3,36 +3,43 @@ package clueGame;
 public class BoardCell {
 	private int row;
 	private int column;
-	private Character initial;
-	
+	Character initial;
+	boolean room;
+	boolean doorway;
+	boolean walkway;
+	DoorDirection doorDirection;
 	
 	public BoardCell(int x, int y)
 	{
 		// Flipped for programmer preference
 		this.column = x;
 		this.row = y;
+		this.room = false;
+		this.doorway = false;
+		this.walkway = false;
 	}
 	
 	public Boolean isWalkway()
 	{
-		return null;
+		
+		return walkway;
 	}
 	
 	public Boolean isRoom()
 	{
-		return null;
+		return room;
 	}
 	
 	public Boolean isDoorway()
 	{
-		return null;
+		return doorway;
 	}
 	public DoorDirection getDoorDirection()
 	{
-		return null;
+		return doorDirection;
 	}
 	public Character getInitial()
 	{
-		return null;
+		return initial;
 	}
 }
