@@ -89,7 +89,7 @@ public class Board
 				if(entry.getValue().equals("Walkway"))
 				{
 					walkwayKey = entry.getKey();
-					System.out.println("Walkway");
+					//System.out.println("Walkway");
 				}
 			}
 			
@@ -105,7 +105,7 @@ public class Board
 			}
 			scanner.close();
 			scanner = new Scanner(file);
-			board = new BoardCell[numColumns][numRows];
+			board = new BoardCell[numRows][numColumns];
 			////////////////////////////////////////////////////////////////////
 			int row = 0;
 			
@@ -116,7 +116,7 @@ public class Board
 				int column = 0;
 				while (column < elements.length)
 				{
-					BoardCell tempCell = new BoardCell(column, row);
+					BoardCell tempCell = new BoardCell(row, column);
 					if (elements[column].length() > 1)
 					{
 						// Multi Character spot (door)
@@ -139,7 +139,7 @@ public class Board
 							tempCell.doorDirection = DoorDirection.NONE;
 							break;
 						};
-						System.out.println("Col: "+ column + " Row "+ row);
+						System.out.println("Row "+ row + "Col: "+ column);
 						
 					}
 					
@@ -152,7 +152,7 @@ public class Board
 						tempCell.walkway = true;
 					}
 
-					board[column][row] = tempCell;
+					board[row][column] = tempCell;
 					column++;	
 				}
 				row++;
@@ -186,9 +186,9 @@ public class Board
 	{
 		return legend;
 	}
-	public BoardCell getCellAt(int column, int row)
+	public BoardCell getCellAt(int row, int column)
 	{
-		return board[column][row];
+		return board[row][column];
 	}
 	
 	public int getNumRows()

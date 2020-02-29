@@ -84,7 +84,6 @@ public class CTest_FileInitTests {
 		assertFalse(cell.isDoorway());		
 
 	}
-	
 	// Test that we have the correct number of doors
 	@Test
 	public void testNumberOfDoorways() 
