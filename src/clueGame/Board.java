@@ -30,7 +30,7 @@ public class Board
 		return theInstance;
 	}
 	
-	public void initalize()
+	public void initialize()
 	{
 		System.out.println("Initialize..");
 		loadRoomConfig();
@@ -176,7 +176,7 @@ public class Board
 	{
 		
 	}
-	public void setConfigs(String boardConfig, String legendConfig)
+	public void setConfigFiles(String boardConfig, String legendConfig)
 	{
 		this.boardConfigFile = boardConfig;
 		this.legendConfig = legendConfig;
@@ -191,11 +191,11 @@ public class Board
 		return board[column][row];
 	}
 	
-	public int getNumberOfRows()
+	public int getNumRows()
 	{
 		return numRows;
 	}
-	public int getNumberOfColumns()
+	public int getNumColumns()
 	{
 		return numColumns;
 	}

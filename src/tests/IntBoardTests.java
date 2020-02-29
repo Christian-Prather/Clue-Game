@@ -28,7 +28,6 @@ public class IntBoardTests
 		//IntBoard board = new IntBoard();
 
 
-
 		BoardCell cell = board.getCell(0,0);
 		System.out.println(cell);
 		Set<BoardCell> testList = board.getAdjList(cell);
