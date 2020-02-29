@@ -8,12 +8,14 @@ package tests;
 // Assert.assertEquals
 import static org.junit.Assert.*;
 
+import java.io.FileNotFoundException;
 import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import clueGame.BadConfigFormatException;
 import clueGame.Board;
 import clueGame.BoardCell;
 import clueGame.DoorDirection;
@@ -29,12 +31,11 @@ public class CTest_FileInitTests {
 	private static Board board;
 	
 	@BeforeClass
-	public static void setUp() {
+	public static void setUp() throws BadConfigFormatException {
 		// Board is singleton, get the only instance
 		board = Board.getInstance();
 		// set the file names to use my config files
 		board.setConfigFiles("CTest_ClueLayout.csv", "CTest_ClueLegend.txt");		
-		// Initialize will load BOTH config files 
 		board.initialize();
 	}
 	@Test
@@ -95,23 +96,23 @@ public class CTest_FileInitTests {
 				if (cell.isDoorway())
 					numDoors++;
 			}
-		Assert.assertEquals(16, numDoors);
+		Assert.assertEquals(25, numDoors);
 	}
 
 	// Test a few room cells to ensure the room initial is correct.
 	@Test
 	public void testRoomInitials() {
 		// Test first cell in room
-//		assertEquals('C', board.getCellAt(0, 0).getInitial());
-//		assertEquals('R', board.getCellAt(4, 8).getInitial());
-//		assertEquals('B', board.getCellAt(9, 0).getInitial());
-//		// Test last cell in room
-//		assertEquals('O', board.getCellAt(21, 22).getInitial());
-//		assertEquals('K', board.getCellAt(21, 0).getInitial());
-//		// Test a walkway
-//		assertEquals('W', board.getCellAt(0, 5).getInitial());
-//		// Test the closet
-//		assertEquals('X', board.getCellAt(9,13).getInitial());
+		assertEquals((Character)'C', board.getCellAt(0, 0).getInitial());
+		assertEquals((Character)'R', board.getCellAt(4, 8).getInitial());
+		assertEquals((Character)'B', board.getCellAt(9, 0).getInitial());
+		// Test last cell in room
+		assertEquals((Character)'O', board.getCellAt(21, 22).getInitial());
+		assertEquals((Character)'K', board.getCellAt(21, 0).getInitial());
+		// Test a walkway
+		assertEquals((Character)'W', board.getCellAt(0, 5).getInitial());
+		// Test the closet
+		assertEquals((Character)'X', board.getCellAt(9,13).getInitial());
 	}
 	
 

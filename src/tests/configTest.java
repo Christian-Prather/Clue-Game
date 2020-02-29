@@ -25,7 +25,7 @@ public class configTest
 		// Board is singleton, get the only instance
 		board = Board.getInstance();
 		// set the file names to use my config files
-		board.setConfigFiles("C12A1ClueLayOut_Langfield_Prather/Clue_Board_Layout_Langfield_Prather.csv", "C12A1ClueLayOut_Langfield_Prather/LegendForClueLayout.txt");		
+		board.setConfigFiles("Clue_Board_Layout_Langfield_Prather.csv", "LegendForClueLayout.txt");		
 		// Initialize will load BOTH config files 
 		board.initialize();
 		
@@ -98,11 +98,11 @@ public class configTest
 	@Test 
 	public void testRoomInitials()
 	{
-//		assertEquals('R', board.getCellAt(0, 14).getInitial());
-//		assertEquals('R', (char)board.getCellAt(6, 14).getInitial());
-//		
-//		assertEquals('R', (char)board.getCellAt(20, 9).getInitial());
-//		assertEquals('R', (char)board.getCellAt(20, 10).getInitial());
+		assertEquals((Character)'Y', board.getCellAt(14, 0).getInitial());
+		assertEquals((Character)'Y', board.getCellAt(14, 6).getInitial());
+		
+		assertEquals((Character)'Y', board.getCellAt(9, 20).getInitial());
+		assertEquals((Character)'X', board.getCellAt(17, 20).getInitial());
 
 
 	}

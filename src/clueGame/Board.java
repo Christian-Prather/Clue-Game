@@ -33,13 +33,24 @@ public class Board
 	public void initialize()
 	{
 		System.out.println("Initialize..");
-		loadRoomConfig();
+		try {
+			loadRoomConfig();
+		} catch (BadConfigFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-		loadBoardConfig();
+		
+		try {
+			loadBoardConfig();
+		} catch (BadConfigFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 	}
-	public void loadRoomConfig()
+	public void loadRoomConfig() throws BadConfigFormatException
 	{
 		System.out.println("In room config");
 		try {
@@ -48,7 +59,7 @@ public class Board
 			
 			
 			System.out.println("Loaded");
-				
+			
 			
 			while(scanner.hasNextLine())
 			{
@@ -58,7 +69,19 @@ public class Board
 				
 					Character tempChar = elements[0].charAt(0);
 					String tempRoomName = elements[1];
-					String tempType = elements[2];
+					String tempType = elements[2].trim();
+//					System.out.println(tempType);
+				
+					if (!tempType.contentEquals("Card"))
+					{
+						if (!tempType.contentEquals("Other"))
+						{
+							System.out.println(tempType + "testing  ");
+							throw new BadConfigFormatException();
+	
+						}
+					}
+					
 					legend.put(tempChar, tempRoomName.trim());
 					System.out.println(tempChar + " " + tempRoomName.trim() + " " + tempType.trim());
 					
@@ -70,10 +93,9 @@ public class Board
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			System.out.print("Cant open legend File");
-			e.printStackTrace();
 		}
 	}
-	public void loadBoardConfig()
+	public void loadBoardConfig() throws BadConfigFormatException
 	{
 		Character walkwayKey = 'w';
 		
@@ -95,12 +117,19 @@ public class Board
 			
 			
 			//Get the dimensions (this is a dumb way of doing this but quick
+			int oldColumns = 0; 
+			boolean notFirstRun = false;
 			while (scanner.hasNextLine())
 			{
 				numRows++;
 				String line = scanner.nextLine();
 				String[] elements = line.split(",");
 				numColumns = elements.length;
+				if (numColumns != oldColumns && notFirstRun)
+				{
+				//	throw new BadConfigFormatException();
+				}
+				notFirstRun = true;
 
 			}
 			scanner.close();
