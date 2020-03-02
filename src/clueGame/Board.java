@@ -32,7 +32,7 @@ public class Board
 	
 	public void initialize()
 	{
-		System.out.println("Initialize..");
+	//	System.out.println("Initialize..");
 		try {
 			loadRoomConfig();
 		} catch (BadConfigFormatException e) {
@@ -52,13 +52,13 @@ public class Board
 	}
 	public void loadRoomConfig() throws BadConfigFormatException
 	{
-		System.out.println("In room config");
+	//	System.out.println("In room config");
 		try {
 			File file = new File(legendConfig);
 			Scanner scanner = new Scanner(file);
 			
 			
-			System.out.println("Loaded");
+	//		System.out.println("Loaded");
 			
 			
 			while(scanner.hasNextLine())
@@ -76,36 +76,36 @@ public class Board
 					{
 						if (!tempType.contentEquals("Other"))
 						{
-							System.out.println(tempType + "testing  ");
+			//				System.out.println(tempType + "testing  ");
 							throw new BadConfigFormatException();
 	
 						}
 					}
 					
 					legend.put(tempChar, tempRoomName.trim());
-					System.out.println(tempChar + " " + tempRoomName.trim() + " " + tempType.trim());
+		//			System.out.println(tempChar + " " + tempRoomName.trim() + " " + tempType.trim());
 					
 			
 			}
-			System.out.print("Out");
+		//	System.out.print("Out");
 			scanner.close();
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			System.out.print("Cant open legend File");
+		//	System.out.print("Cant open legend File");
 		}
 	}
 	public void loadBoardConfig() throws BadConfigFormatException
 	{
 		Character walkwayKey = 'w';
 		
-		System.out.println("In Board config");
+	//	System.out.println("In Board config");
 		try {
 			File file = new File(boardConfigFile);
 			Scanner scanner = new Scanner(file);
 			
 			
-			System.out.println("Loaded");
+	//		System.out.println("Loaded");
 			for (Map.Entry<Character, String> entry : legend.entrySet())
 			{
 				if(entry.getValue().equals("Walkway"))
@@ -168,7 +168,7 @@ public class Board
 							tempCell.doorDirection = DoorDirection.NONE;
 							break;
 						};
-						System.out.println("Row "+ row + "Col: "+ column);
+			//			System.out.println("Row "+ row + "Col: "+ column);
 						
 					}
 					
@@ -187,12 +187,12 @@ public class Board
 				row++;
 
 			}
-			System.out.print("Out");
+		//	System.out.print("Out");
 			scanner.close();
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			System.out.print("Cant open legend File");
+	//		System.out.print("Cant open legend File");
 			e.printStackTrace();
 		}
 				
@@ -201,10 +201,19 @@ public class Board
 	{
 		
 	}
-	public void calcTargets(BoardCell cell, int pathLength)
+	public void calcTargets(int row, int column, int pathLength)
 	{
 		
 	}
+	public Set<BoardCell> getAdjList(int row, int column)
+	{
+		return null;
+	}
+	public Set<BoardCell> getTargets()
+	{
+		return null;
+	}
+	
 	public void setConfigFiles(String boardConfig, String legendConfig)
 	{
 		this.boardConfigFile = boardConfig;
@@ -228,7 +237,5 @@ public class Board
 	{
 		return numColumns;
 	}
-	
-	
 
 }
