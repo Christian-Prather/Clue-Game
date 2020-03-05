@@ -217,95 +217,73 @@ public class Board
 				Set<BoardCell> adjacencies = new HashSet<BoardCell>();
 				System.out.println("GRID: " + board[i][j].row + " " + board[i][j].column);
 				
-				if (board[i][j].row != 0)
+				if (board[i][j].isDoorway())
 				{
-					//BoardCell tempCell =  getCell(grid[i][j].column -1, grid[i][j].row)
-					//Handle the in room adjacencies ignore
-					if (!board[i-1][j].isRoom())
+					if (board[i][j].doorDirection == DoorDirection.UP)
 					{
-						if(board[i][j].isRoom())
-						{
-							// Currently a room so need to check if adj option is a door or dont add it
-							if(board[i-1][j].isDoorway())
-							{
-								adjacencies.add(board[i - 1][j]);
-							}
-						}
-						else
+						adjacencies.add(board[i -1][j]);
+
+					}
+				
+					
+					else if (board[i][j].doorDirection == DoorDirection.LEFT)
+					{
+						adjacencies.add(board[i][j-1]);
+
+					}
+					else if (board[i][j].doorDirection == DoorDirection.RIGHT)
+					{
+						adjacencies.add(board[i][j+1]);
+					}
+					else if (board[i][j].doorDirection == DoorDirection.DOWN)
+					{
+						adjacencies.add(board[i + 1][j]);
+
+					}
+					adjMatrix.put(board[i][j], adjacencies);
+					System.out.println("ADJ: " + adjacencies);
+					
+				}
+				///////////////////////////////////Not Doorway///////////////////////////////////////////////
+				else
+				{
+					if (board[i][j].row != 0)
+					{
+						//BoardCell tempCell =  getCell(grid[i][j].column -1, grid[i][j].row)
+						//Handle the in room adjacencies ignore
+						if (!board[i-1][j].isRoom())
 						{
 							adjacencies.add(board[i -1][j]);
-
 						}
 					}
-
-				}
-				if (board[i][j].column != 0)
-				{
-					//BoardCell tempCell = getCell(grid[i][j].column, grid[i][j].row -1);
-					if (!board[i][j-1].isRoom())
+					if (board[i][j].column != 0)
 					{
-						if(board[i][j].isRoom())
-						{
-							// Currently a room so need to check if adj option is a door or dont add it
-							if(board[i][j-1].isDoorway())
-							{
-								adjacencies.add(board[i][j-1]);
-							}
-						}
-						else
+						if (!board[i][j-1].isRoom())
 						{
 							adjacencies.add(board[i][j-1]);
 						}
-					}
 
-				}
-				if (board[i][j].column != board[0].length -1)
-				{
-					//BoardCell tempCell = getCell(grid[i][j].column, grid[i][j].row + 1);
-					if(!board[i][j+1].isRoom())
+					}
+					if (board[i][j].column != board[0].length -1)
 					{
-						if(board[i][j].isRoom())
-						{
-							// Currently a room so need to check if adj option is a door or dont add it
-							if(board[i][j+1].isDoorway())
-							{
-								adjacencies.add(board[i][j+1]);
-							}
-						}
-						else
+						if(!board[i][j+1].isRoom())
 						{
 							adjacencies.add(board[i][j+1]);
-					
 						}
 					}
-
-//					
-				}
-				if (board[i][j].row != board.length -1)
-				{
-				//	BoardCell tempCell = getCell(grid[i][j].column +1, grid[i][j].row);
-					if (!board[i+1][j].isRoom())
+					if (board[i][j].row != board.length -1)
 					{
-						if(board[i][j].isRoom())
-						{
-							// Currently a room so need to check if adj option is a door or dont add it
-							if(board[i+1][j].isDoorway())
-							{
-								adjacencies.add(board[i + 1][j]);
-							}
-						}
-						else
+						if (!board[i+1][j].isRoom())
 						{
 							adjacencies.add(board[i + 1][j]);
-
 						}
 					}
-
+					adjMatrix.put(board[i][j], adjacencies);
+					System.out.println("ADJ: " + adjacencies);
 				}
-				adjMatrix.put(board[i][j], adjacencies);
-				System.out.println("ADJ: " + adjacencies);
+				
+	
 			}
-		//	System.out.println();
 		}
 	}
 	public void calcTargets(int row, int column, int pathLength)
