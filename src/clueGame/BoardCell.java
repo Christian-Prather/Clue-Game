@@ -3,7 +3,7 @@ package clueGame;
 public class BoardCell {
 	public int row;
 	public int column;
-	Character initial;
+	public Character initial;
 	boolean room;
 	boolean doorway;
 	boolean walkway;
@@ -12,8 +12,8 @@ public class BoardCell {
 	public BoardCell(int x, int y)
 	{
 		// Flipped for programmer preference
-		this.column = x;
-		this.row = y;
+		this.row = x;
+		this.column = y;
 		this.room = false;
 		this.doorway = false;
 		this.walkway = false;
