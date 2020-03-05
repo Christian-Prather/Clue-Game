@@ -41,7 +41,7 @@ public class testAdjTargets
 	@Test
 	public void testAdjInRoom() 
 	{
-		Set<clueGame.BoardCell> cells = board.getAdjList(16, 19);
+		Set<clueGame.BoardCell> cells = board.getAdjList(14, 19);
 		assertTrue(cells.isEmpty());
 
 	}
