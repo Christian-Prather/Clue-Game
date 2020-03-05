@@ -1,8 +1,8 @@
 package clueGame;
 
 public class BoardCell {
-	private int row;
-	private int column;
+	public int row;
+	public int column;
 	Character initial;
 	boolean room;
 	boolean doorway;

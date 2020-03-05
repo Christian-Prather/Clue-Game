@@ -137,9 +137,9 @@ public class testAdjTargets
 	@Test
 	public void testEnterRoomTarget()
 	{
-		board.calcTargets(1, 18, 1);
+		board.calcTargets(8, 4, 3);
 		Set<clueGame.BoardCell> cells = board.getTargets();
-		assertTrue(cells.contains(board.getCellAt(12, 18)));
+		assertTrue(cells.contains(board.getCellAt(8, 3)));
 		assertEquals(cells.size(), 1);
 		
 		board.calcTargets(9, 16, 1);

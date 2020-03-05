@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
@@ -16,7 +17,7 @@ public class Board
 	private BoardCell board[][];
 	private Map<Character, String> legend = new HashMap<Character, String>();
 	private String legendConfig;
-	private Map<BoardCell, Set<BoardCell>> adjjMatrix;
+	private Map<BoardCell, Set<BoardCell>> adjMatrix;
 	private Set<BoardCell> targets;
 	private String boardConfigFile;
 	//private String roomConfigFile;
@@ -199,7 +200,38 @@ public class Board
 	}
 	public void calcAdjacencies()
 	{
-		
+		for (int i = 0; i < board.length; i++)
+		{
+			for (int j = 0; j < board[0].length; j++)
+			{
+				//BoardCell keyCell = getCell(grid[i][j]);
+				Set<BoardCell> adjacencies = new HashSet<BoardCell>();
+				System.out.println("GRID: " + board[i][j].column + " " + board[i][j].row);
+
+				if (board[i][j].column != 0)
+				{
+					//BoardCell tempCell =  getCell(grid[i][j].column -1, grid[i][j].row);
+					adjacencies.add(board[i -1][j]);
+				}
+				if (board[i][j].row != 0)
+				{
+					//BoardCell tempCell = getCell(grid[i][j].column, grid[i][j].row -1);
+					adjacencies.add(board[i][j-1]);
+				}
+				if (board[i][j].row != board[1].length -1)
+				{
+					//BoardCell tempCell = getCell(grid[i][j].column, grid[i][j].row + 1);
+					adjacencies.add(board[i][j+1]);
+				}
+				if (board[i][j].column != board[0].length -1)
+				{
+				//	BoardCell tempCell = getCell(grid[i][j].column +1, grid[i][j].row);
+					adjacencies.add(board[i + 1][j]);
+				}
+				adjMatrix.put(board[i][j], adjacencies);
+				//System.out.println(adjacent);
+			}
+		}
 	}
 	public void calcTargets(int row, int column, int pathLength)
 	{
