@@ -50,12 +50,16 @@ public class testAdjTargets
 	public void testEdgeOfBoard()
 	{
 		Set<clueGame.BoardCell> cells = board.getAdjList(20, 22);
-		assertFalse(cells.contains(board.getCellAt(40, 40)));
-		assertFalse(cells.contains(board.getCellAt(20, 23)));
-		
-		cells = board.getAdjList(0, 9);
-		assertFalse(cells.contains(board.getCellAt(40, 40)));
-		assertFalse(cells.contains(board.getCellAt(-1, 9)));
+		for(clueGame.BoardCell cell: cells) {
+			if(cell == null) {
+				assertFalse(cells.contains(board.getCellAt(21, 22)));
+				assertFalse(cells.contains(board.getCellAt(20, 23)));
+				
+				cells = board.getAdjList(0, 9);
+				assertFalse(cells.contains(board.getCellAt(40, 40)));
+				assertFalse(cells.contains(board.getCellAt(-1, 9)));
+			}
+		}
 
 	}
 	
