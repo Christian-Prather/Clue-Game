@@ -24,7 +24,6 @@ public class Board
 	private Set<BoardCell> visited = new HashSet<BoardCell>();
 
 	private String boardConfigFile;
-	//private String roomConfigFile;
 	private static Board theInstance = new Board();
 	boolean firstRun = true;
 	
@@ -37,11 +36,9 @@ public class Board
 	
 	public void initialize()
 	{
-	//	System.out.println("Initialize..");
 		try {
 			loadRoomConfig();
 		} catch (BadConfigFormatException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -49,7 +46,6 @@ public class Board
 		try {
 			loadBoardConfig();
 		} catch (BadConfigFormatException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		calcAdjacencies();
@@ -59,69 +55,54 @@ public class Board
 	}
 	public void loadRoomConfig() throws BadConfigFormatException
 	{
-	//	System.out.println("In room config");
 		try {
 			File file = new File(legendConfig);
 			Scanner scanner = new Scanner(file);
-			
-			
-	//		System.out.println("Loaded");
-			
-			
+
 			while(scanner.hasNextLine())
 			{
 				String line = scanner.nextLine();
 				String[] elements = line.split(",");
 				
-				
-					Character tempChar = elements[0].charAt(0);
-					String tempRoomName = elements[1];
-					String tempType = elements[2].trim();
-//					System.out.println(tempType);
-				
-					if (!tempType.contentEquals("Card"))
+				Character tempChar = elements[0].charAt(0);
+				String tempRoomName = elements[1];
+				String tempType = elements[2].trim();
+			
+				if (!tempType.contentEquals("Card"))
+				{
+					if (!tempType.contentEquals("Other"))
 					{
-						if (!tempType.contentEquals("Other"))
-						{
-			//				System.out.println(tempType + "testing  ");
-							throw new BadConfigFormatException();
-	
-						}
+						throw new BadConfigFormatException();
+
 					}
-					
-					legend.put(tempChar, tempRoomName.trim());
-		//			System.out.println(tempChar + " " + tempRoomName.trim() + " " + tempType.trim());
-					
+				}
+				
+				legend.put(tempChar, tempRoomName.trim());
 			
 			}
-		//	System.out.print("Out");
 			scanner.close();
 
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-		//	System.out.print("Cant open legend File");
+		} catch (FileNotFoundException e) 
+		{
+			e.printStackTrace();
+
 		}
 	}
 	public void loadBoardConfig() throws BadConfigFormatException
 	{
 		Character walkwayKey = 'w';
 		
-	//	System.out.println("In Board config");
 		try {
 			File file = new File(boardConfigFile);
 			Scanner scanner = new Scanner(file);
 			
-			
-	//		System.out.println("Loaded");
 			for (Map.Entry<Character, String> entry : legend.entrySet())
 			{
 				if(entry.getValue().equals("Walkway"))
 				{
 					walkwayKey = entry.getKey();
-					//System.out.println("Walkway");
 				}
 			}
-			
 			
 			//Get the dimensions (this is a dumb way of doing this but quick
 			int oldColumns = 0; 
@@ -134,7 +115,7 @@ public class Board
 				numColumns = elements.length;
 				if (numColumns != oldColumns && notFirstRun)
 				{
-				//	throw new BadConfigFormatException();
+					throw new BadConfigFormatException();
 				}
 				notFirstRun = true;
 
@@ -142,7 +123,6 @@ public class Board
 			scanner.close();
 			scanner = new Scanner(file);
 			board = new BoardCell[numRows][numColumns];
-			////////////////////////////////////////////////////////////////////
 			int row = 0;
 			
 			while(scanner.hasNextLine())
@@ -177,13 +157,9 @@ public class Board
 							tempCell.doorDirection = DoorDirection.NONE;
 							break;
 						};
-			//			System.out.println("Row "+ row + "Col: "+ column);
 						
 					}
-					
-				
-					// Check for walkway
-				
+								
 					else if(tempCell.initial == walkwayKey)
 					{
 						tempCell.walkway = true;
@@ -199,12 +175,11 @@ public class Board
 				row++;
 
 			}
-		//	System.out.print("Out");
 			scanner.close();
 
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-	//		System.out.print("Cant open legend File");
+		} catch (FileNotFoundException e) 
+		{
+
 			e.printStackTrace();
 		}
 				
@@ -353,10 +328,10 @@ public class Board
 		if (firstRun)
 		{
 			targets.clear();
+			visited.clear();
 			firstRun = false;
 
 		}
-		//BoardCell startCell = getCellAt(row, column);
 		visited.add(board[row][column]);
 		Set<BoardCell> adjCells = getAdjList(row, column);
 		
@@ -364,6 +339,7 @@ public class Board
 			
 			if(!visited.contains(eachCell))
 			{
+
 				visited.add(eachCell);
 				if(pathLength == 1 || eachCell.isDoorway())
 				{
@@ -375,17 +351,16 @@ public class Board
 				}
 				visited.remove(eachCell);
 			}
-			
-
 		
 		}
-		System.out.print("Cell Path "+ pathLength +" " + row + " " + column + "| " + "Lenght " + targets.size());
-		for (BoardCell target : targets)
-		{
-			System.out.print("( " + target.row + " " + target.column + " )");
-
-		}
-		System.out.println();
+// 		Leave me for future debugging
+//		System.out.print("Cell Path "+ pathLength +" " + row + " " + column + "| " + "Lenght " + targets.size());
+//		for (BoardCell target : targets)
+//		{
+//			System.out.print("( " + target.row + " " + target.column + " )");
+//
+//		}
+//		System.out.println();
 
 	}
 	public Set<BoardCell> getAdjList(int row, int column)
