@@ -1,0 +1,46 @@
+We pair programmed almost 95% percent of this
+
+* All test pass
+* All but one test passing
+* Final target calc
+* Fixed targets again
+* Fix clearing of targets
+*   Merge branch 'master' of https://github.com/Christian-Prather/Clue-Game
+|\  
+| * updated edge case if board cell is null
+* | Test walkway working
+|/  
+* Most of target tests are passing
+* All the Adj checks working
+* Method of checking that only adj is a door if currently in  room
+* Detection of room working
+* Old adj logic working
+* Added in old adj calculations
+* adding new excel spreadsheet
+* Adj and Target Fails
+* Tests Pass Finally
+*   Merge branch 'master' of https://github.com/Christian-Prather/Clue-Game
+|\  
+| * Changed Rows columns to be used like the class convention
+* | fixed test names
+|/  
+* Tests pass except for initial
+* Failed Test Submission
+* Added start of tests
+* Pushing txt files for legend and board.
+* Added skeletons for classes
+* Restructured folders
+* pushing zipped file containing passed and failing tests
+*   Merge branch 'master' of https://github.com/Christian-Prather/Clue-Game
+|\  
+| * Tests finally passed
+* | Added failed zip
+|/  
+* Passed Adjacency Tests!
+* IDK this is acting wierd
+* Issue with tests
+* Adjacencies calculations are working
+* This is ready for failed test submission
+* First run of failing tests (need to add actuall logic)
+* adding IntBoard java class
+* Intital Pass
