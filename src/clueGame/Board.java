@@ -9,6 +9,8 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
+import clueGame.BoardCell;
+
 public class Board 
 {
 	private int numRows;
@@ -18,7 +20,9 @@ public class Board
 	private Map<Character, String> legend = new HashMap<Character, String>();
 	private String legendConfig;
 	private Map<BoardCell, Set<BoardCell>> adjMatrix = new HashMap<BoardCell, Set<BoardCell>>();
-	private Set<BoardCell> targets;
+	private Set<BoardCell> targets = new HashSet<BoardCell>();
+	private Set<BoardCell> visited = new HashSet<BoardCell>();
+
 	private String boardConfigFile;
 	//private String roomConfigFile;
 	private static Board theInstance = new Board();
@@ -207,7 +211,7 @@ public class Board
 	}
 	public void calcAdjacencies()
 	{
-		System.out.println(board.length + " " + board[0].length);
+	//	System.out.println(board.length + " " + board[0].length);
 		for (int i = 0; i < board.length; i++)
 		{
 			for (int j = 0; j < board[0].length; j++)
@@ -215,7 +219,7 @@ public class Board
 	//			System.out.print(board[i][j].initial + " ");
 				//BoardCell keyCell = getCell(grid[i][j]);
 				Set<BoardCell> adjacencies = new HashSet<BoardCell>();
-				System.out.println("GRID: " + board[i][j].row + " " + board[i][j].column);
+			//	System.out.println("GRID: " + board[i][j].row + " " + board[i][j].column);
 				
 				if (board[i][j].isDoorway())
 				{
@@ -241,7 +245,7 @@ public class Board
 
 					}
 					adjMatrix.put(board[i][j], adjacencies);
-					System.out.println("ADJ: " + adjacencies);
+				//	System.out.println("ADJ: " + adjacencies);
 					
 				}
 				///////////////////////////////////Not Doorway///////////////////////////////////////////////
@@ -279,26 +283,60 @@ public class Board
 						}
 					}
 					adjMatrix.put(board[i][j], adjacencies);
-					System.out.println("ADJ: " + adjacencies);
+		//			System.out.println("ADJ: " + adjacencies);
 				}
 				
 	
 			}
 		}
 	}
+	
+	
+	
 	public void calcTargets(int row, int column, int pathLength)
 	{
+		BoardCell startCell = getCellAt(row, column);
+		visited.add(startCell);
+		Set<BoardCell> adjCells = getAdjList(row, column);
 		
+		for(BoardCell eachCell : adjCells) {
+			
+			if(!visited.contains(eachCell))
+			{
+				visited.add(eachCell);
+				if(pathLength == 1)
+				{
+					targets.add(eachCell);
+				}
+				else
+				{
+					calcTargets(eachCell.row, eachCell.column, pathLength -1);
+				}
+				visited.remove(eachCell);
+			}
+			
+
+		
+		}
+		System.out.print("Cell " + row + " " + column + "| ");
+		for (BoardCell target : targets)
+		{
+			System.out.print("( " + target.row + " " + target.column + " )");
+
+		}
+		System.out.println();
+
 	}
 	public Set<BoardCell> getAdjList(int row, int column)
 	{
 		Set<BoardCell> adjCells = adjMatrix.get(board[row][column]);
-		System.out.println("ADJ:" + adjCells);
+	//	System.out.println("ADJ:" + adjCells);
 		return adjCells;
 	}
 	public Set<BoardCell> getTargets()
 	{
-		return null;
+		
+		return targets;
 	}
 	
 	public void setConfigFiles(String boardConfig, String legendConfig)

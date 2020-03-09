@@ -140,12 +140,12 @@ public class testAdjTargets
 		board.calcTargets(8, 4, 3);
 		Set<clueGame.BoardCell> cells = board.getTargets();
 		assertTrue(cells.contains(board.getCellAt(8, 3)));
-		assertEquals(cells.size(), 1);
+		assertEquals(cells.size(), 10);
 		
 		board.calcTargets(9, 16, 1);
 		cells = board.getTargets();
 		assertTrue(cells.contains(board.getCellAt(8, 16)));
-		assertEquals(cells.size(), 1);
+		assertEquals(cells.size(), 14);
 
 	}
 	
@@ -159,7 +159,7 @@ public class testAdjTargets
 		
 		board.calcTargets(4, 11, 2);
 		cells = board.getTargets();
-		assertTrue(cells.contains(board.getCellAt(7, 11)));
+		assertTrue(cells.contains(board.getCellAt(6, 11)));
 		
 	}
 
