@@ -365,7 +365,7 @@ public class Board
 			if(!visited.contains(eachCell))
 			{
 				visited.add(eachCell);
-				if(pathLength == 1)
+				if(pathLength == 1 || eachCell.isDoorway())
 				{
 					targets.add(eachCell);
 				}
@@ -380,11 +380,11 @@ public class Board
 		
 		}
 		System.out.print("Cell Path "+ pathLength +" " + row + " " + column + "| " + "Lenght " + targets.size());
-//		for (BoardCell target : targets)
-//		{
-//			System.out.print("( " + target.row + " " + target.column + " )");
-//
-//		}
+		for (BoardCell target : targets)
+		{
+			System.out.print("( " + target.row + " " + target.column + " )");
+
+		}
 		System.out.println();
 
 	}
