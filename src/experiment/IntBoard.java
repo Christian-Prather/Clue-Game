@@ -84,12 +84,10 @@ public class IntBoard {
 	
 	public void calcTargets(BoardCell startCell, int pathLength)
 	{
-		
 		visited.add(startCell);
 		Set<BoardCell> adjCells = getAdjList(startCell);
 		
 		for(BoardCell eachCell : adjCells) {
-			
 			if(!visited.contains(eachCell))
 			{
 				visited.add(eachCell);
@@ -103,9 +101,6 @@ public class IntBoard {
 				}
 				visited.remove(eachCell);
 			}
-			
-			
-			
 //			
 //			if(pathLength == 1 ) {
 //				targets.add(eachCell);
