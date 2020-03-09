@@ -113,7 +113,7 @@ public class testAdjTargets
 	{
 		board.calcTargets(15, 9, 2);
 		Set<clueGame.BoardCell> cells = board.getTargets();
-		assertTrue(cells.contains(board.getCellAt(16, 9)));
+		assertTrue(cells.contains(board.getCellAt(16, 10)));
 		assertFalse(cells.contains(board.getCellAt(17,9)));
 		
 		board.calcTargets(5, 13, 2);
