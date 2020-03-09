@@ -26,7 +26,7 @@ public class Board
 	private String boardConfigFile;
 	//private String roomConfigFile;
 	private static Board theInstance = new Board();
-
+	boolean firstRun = true;
 	
 	private Board() {}
 	// this method returns the only Board
@@ -350,8 +350,13 @@ public class Board
 	
 	public void calcTargets(int row, int column, int pathLength)
 	{
+		if (firstRun)
+		{
+			targets.clear();
+			firstRun = false;
+
+		}
 		//BoardCell startCell = getCellAt(row, column);
-		targets.clear();
 		visited.add(board[row][column]);
 		Set<BoardCell> adjCells = getAdjList(row, column);
 		
@@ -391,7 +396,7 @@ public class Board
 	}
 	public Set<BoardCell> getTargets()
 	{
-		
+		firstRun = true;
 		return targets;
 	}
 	
