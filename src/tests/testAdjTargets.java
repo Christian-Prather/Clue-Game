@@ -149,7 +149,7 @@ public class testAdjTargets
 		board.calcTargets(9, 16, 1);
 		cells = board.getTargets();
 		assertTrue(cells.contains(board.getCellAt(8, 16)));
-		assertEquals(cells.size(), 14);
+		assertEquals(cells.size(), 4);
 
 	}
 	

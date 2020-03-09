@@ -221,6 +221,8 @@ public class Board
 				Set<BoardCell> adjacencies = new HashSet<BoardCell>();
 				System.out.println("GRID: " + board[i][j].row + " " + board[i][j].column);
 				
+				
+				
 				if (board[i][j].isDoorway())
 				{
 					if (board[i][j].doorDirection == DoorDirection.UP)
@@ -254,7 +256,7 @@ public class Board
 					System.out.println();
 				}
 				///////////////////////////////////Not Doorway///////////////////////////////////////////////
-				else
+				else if(!board[i][j].isRoom())
 				{
 					
 					
@@ -318,13 +320,11 @@ public class Board
 					{
 						if (board[i+1][j].isDoorway())
 						{
-							
-						
-						if ((board[i+1][j].doorDirection == DoorDirection.UP))
-						{
-							adjacencies.add(board[i + 1][j]);
-	
-						}
+							if ((board[i+1][j].doorDirection == DoorDirection.UP))
+							{
+								adjacencies.add(board[i + 1][j]);
+		
+							}
 						}
 						else if (!board[i+1][j].isRoom())
 						{
@@ -391,7 +391,10 @@ public class Board
 	public Set<BoardCell> getAdjList(int row, int column)
 	{
 		Set<BoardCell> adjCells = adjMatrix.get(board[row][column]);
-	//	System.out.println("ADJ:" + adjCells);
+		if (adjCells == null)
+		{
+			return new HashSet<BoardCell>();
+		}
 		return adjCells;
 	}
 	public Set<BoardCell> getTargets()
