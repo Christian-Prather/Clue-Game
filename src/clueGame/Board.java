@@ -219,7 +219,7 @@ public class Board
 	//			System.out.print(board[i][j].initial + " ");
 				//BoardCell keyCell = getCell(grid[i][j]);
 				Set<BoardCell> adjacencies = new HashSet<BoardCell>();
-			//	System.out.println("GRID: " + board[i][j].row + " " + board[i][j].column);
+				System.out.println("GRID: " + board[i][j].row + " " + board[i][j].column);
 				
 				if (board[i][j].isDoorway())
 				{
@@ -245,45 +245,100 @@ public class Board
 
 					}
 					adjMatrix.put(board[i][j], adjacencies);
-				//	System.out.println("ADJ: " + adjacencies);
-					
+					for (BoardCell adjacent : adjacencies)
+					{
+						System.out.print("Adj: " + adjacent.row + " " + adjacent.column + " ");
+						
+	
+					}
+					System.out.println();
 				}
 				///////////////////////////////////Not Doorway///////////////////////////////////////////////
 				else
 				{
+					
+					
+					
 					if (board[i][j].row != 0)
 					{
 						//BoardCell tempCell =  getCell(grid[i][j].column -1, grid[i][j].row)
 						//Handle the in room adjacencies ignore
-						if (!board[i-1][j].isRoom())
+						if (board[i-1][j].isDoorway()) 
+						{
+							// Need to check that its enetered from correct direction
+							if (board[i-1][j].doorDirection == DoorDirection.DOWN)
+							{
+								adjacencies.add(board[i -1][j]);
+
+							}
+						}
+						
+						else if (!board[i-1][j].isRoom())
 						{
 							adjacencies.add(board[i -1][j]);
 						}
 					}
+					
 					if (board[i][j].column != 0)
 					{
-						if (!board[i][j-1].isRoom())
+						
+						if (board[i][j-1].isDoorway())
+						{
+							if (board[i][j-1].doorDirection == DoorDirection.RIGHT)
+							{
+								adjacencies.add(board[i][j-1]);
+	
+							}
+						}
+						else if (!board[i][j-1].isRoom())
 						{
 							adjacencies.add(board[i][j-1]);
 						}
 
 					}
+					
 					if (board[i][j].column != board[0].length -1)
 					{
-						if(!board[i][j+1].isRoom())
+						
+						if (board[i][j+1].isDoorway())
+						{					
+							if (board[i][j+1].doorDirection == DoorDirection.LEFT)
+							{
+								adjacencies.add(board[i][j+1]);
+	
+							}
+						}
+						else if(!board[i][j+1].isRoom())
 						{
 							adjacencies.add(board[i][j+1]);
 						}
 					}
+					
 					if (board[i][j].row != board.length -1)
 					{
-						if (!board[i+1][j].isRoom())
+						if (board[i+1][j].isDoorway())
+						{
+							
+						
+						if ((board[i+1][j].doorDirection == DoorDirection.UP))
+						{
+							adjacencies.add(board[i + 1][j]);
+	
+						}
+						}
+						else if (!board[i+1][j].isRoom())
 						{
 							adjacencies.add(board[i + 1][j]);
 						}
 					}
 					adjMatrix.put(board[i][j], adjacencies);
-		//			System.out.println("ADJ: " + adjacencies);
+					for (BoardCell adjacent : adjacencies)
+					{
+						System.out.print("Adj: " + adjacent.row + " " + adjacent.column + " ");
+						
+	
+					}
+					System.out.println();
 				}
 				
 	
@@ -295,8 +350,9 @@ public class Board
 	
 	public void calcTargets(int row, int column, int pathLength)
 	{
-		BoardCell startCell = getCellAt(row, column);
-		visited.add(startCell);
+		//BoardCell startCell = getCellAt(row, column);
+		targets.clear();
+		visited.add(board[row][column]);
 		Set<BoardCell> adjCells = getAdjList(row, column);
 		
 		for(BoardCell eachCell : adjCells) {
@@ -318,12 +374,12 @@ public class Board
 
 		
 		}
-		System.out.print("Cell " + row + " " + column + "| ");
-		for (BoardCell target : targets)
-		{
-			System.out.print("( " + target.row + " " + target.column + " )");
-
-		}
+		System.out.print("Cell Path "+ pathLength +" " + row + " " + column + "| " + "Lenght " + targets.size());
+//		for (BoardCell target : targets)
+//		{
+//			System.out.print("( " + target.row + " " + target.column + " )");
+//
+//		}
 		System.out.println();
 
 	}
