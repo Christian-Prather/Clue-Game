@@ -13,6 +13,7 @@ import clueGame.BoardCell;
 
 public class Board 
 {
+	// Initalize singlton variables to be used for all methods
 	private int numRows;
 	private int numColumns;
 	public int MAX_BOARD_SIZE = 50;
@@ -24,8 +25,8 @@ public class Board
 	private Set<BoardCell> visited = new HashSet<BoardCell>();
 
 	private String boardConfigFile;
-	private static Board theInstance = new Board();
-	boolean firstRun = true;
+	private static Board theInstance = new Board(); // Singlton instance
+	boolean firstRun = true; // Variable used in calcTargets
 	
 	private Board() {}
 	// this method returns the only Board
@@ -34,46 +35,53 @@ public class Board
 		return theInstance;
 	}
 	
+	// Load room csv and the legend
 	public void initialize()
 	{
-		try {
+		try 
+		{
 			loadRoomConfig();
-		} catch (BadConfigFormatException e) {
+		} catch (BadConfigFormatException e) 
+		{
 			e.printStackTrace();
 		}
 
-		
-		try {
+		try 
+		{
 			loadBoardConfig();
-		} catch (BadConfigFormatException e) {
+		} catch (BadConfigFormatException e)
+		{
 			e.printStackTrace();
 		}
 		calcAdjacencies();
-
-		
-		
+	
 	}
+
 	public void loadRoomConfig() throws BadConfigFormatException
 	{
+		// Check for bad file
 		try {
 			File file = new File(legendConfig);
 			Scanner scanner = new Scanner(file);
 
+			// Grab every line of the room config (legend) one at a time
 			while(scanner.hasNextLine())
 			{
 				String line = scanner.nextLine();
+				// Split by every comma
 				String[] elements = line.split(",");
 				
+				// Extract the 3 elements from the line
 				Character tempChar = elements[0].charAt(0);
 				String tempRoomName = elements[1];
 				String tempType = elements[2].trim();
-			
+				
+				// Only two possible types
 				if (!tempType.contentEquals("Card"))
 				{
 					if (!tempType.contentEquals("Other"))
 					{
 						throw new BadConfigFormatException();
-
 					}
 				}
 				
@@ -85,14 +93,17 @@ public class Board
 		} catch (FileNotFoundException e) 
 		{
 			e.printStackTrace();
-
 		}
 	}
+	
 	public void loadBoardConfig() throws BadConfigFormatException
 	{
+		// Set default walkway key for our room
 		Character walkwayKey = 'w';
 		
-		try {
+		// FileNotFoundException
+		try 
+		{
 			File file = new File(boardConfigFile);
 			Scanner scanner = new Scanner(file);
 			
@@ -104,7 +115,8 @@ public class Board
 				}
 			}
 			
-			//Get the dimensions (this is a dumb way of doing this but quick
+			// Get the dimensions (this is a dumb way of doing this but quick
+			// Check that there are consistent column numbers
 			int oldColumns = 0; 
 			boolean notFirstRun = false;
 			while (scanner.hasNextLine())
@@ -121,10 +133,12 @@ public class Board
 
 			}
 			scanner.close();
+
 			scanner = new Scanner(file);
 			board = new BoardCell[numRows][numColumns];
 			int row = 0;
 			
+			// Parse room file
 			while(scanner.hasNextLine())
 			{
 				String line = scanner.nextLine();
@@ -135,6 +149,7 @@ public class Board
 					BoardCell tempCell = new BoardCell(row, column);
 					tempCell.initial = elements[column].charAt(0);
 
+					// This cell is a door
 					if (elements[column].length() > 1)
 					{
 						// Multi Character spot (door)
@@ -159,16 +174,17 @@ public class Board
 						};
 						
 					}
-								
+					// Cell is a walkway		
 					else if(tempCell.initial == walkwayKey)
 					{
 						tempCell.walkway = true;
 					}
+					// Cell is a room
 					else
 					{
 						tempCell.room = true;
 					}
-
+					// Add cell to board matrix
 					board[row][column] = tempCell;
 					column++;	
 				}
@@ -179,34 +195,32 @@ public class Board
 
 		} catch (FileNotFoundException e) 
 		{
-
 			e.printStackTrace();
 		}
 				
 	}
+
 	public void calcAdjacencies()
 	{
-	//	System.out.println(board.length + " " + board[0].length);
+		// Loop through every row
 		for (int i = 0; i < board.length; i++)
 		{
+			// Loop through each column
 			for (int j = 0; j < board[0].length; j++)
 			{
-	//			System.out.print(board[i][j].initial + " ");
-				//BoardCell keyCell = getCell(grid[i][j]);
+				// List of adjacencies for a cell
 				Set<BoardCell> adjacencies = new HashSet<BoardCell>();
-				System.out.println("GRID: " + board[i][j].row + " " + board[i][j].column);
-				
-				
-				
+				// System.out.println("GRID: " + board[i][j].row + " " + board[i][j].column);
+			
+				// Is the cell a doorway (has special rules)
 				if (board[i][j].isDoorway())
 				{
+					// If door direction is up only allow bottom cell to be added
 					if (board[i][j].doorDirection == DoorDirection.UP)
 					{
 						adjacencies.add(board[i -1][j]);
 
 					}
-				
-					
 					else if (board[i][j].doorDirection == DoorDirection.LEFT)
 					{
 						adjacencies.add(board[i][j-1]);
@@ -226,19 +240,17 @@ public class Board
 					{
 						System.out.print("Adj: " + adjacent.row + " " + adjacent.column + " ");
 						
-	
 					}
 					System.out.println();
 				}
+
 				///////////////////////////////////Not Doorway///////////////////////////////////////////////
+				// Cell not a door or room
 				else if(!board[i][j].isRoom())
 				{
-					
-					
-					
+					// Edge case
 					if (board[i][j].row != 0)
 					{
-						//BoardCell tempCell =  getCell(grid[i][j].column -1, grid[i][j].row)
 						//Handle the in room adjacencies ignore
 						if (board[i-1][j].isDoorway()) 
 						{
@@ -246,19 +258,16 @@ public class Board
 							if (board[i-1][j].doorDirection == DoorDirection.DOWN)
 							{
 								adjacencies.add(board[i -1][j]);
-
 							}
 						}
-						
 						else if (!board[i-1][j].isRoom())
 						{
 							adjacencies.add(board[i -1][j]);
 						}
 					}
-					
+					// Edge Case
 					if (board[i][j].column != 0)
 					{
-						
 						if (board[i][j-1].isDoorway())
 						{
 							if (board[i][j-1].doorDirection == DoorDirection.RIGHT)
@@ -274,6 +283,7 @@ public class Board
 
 					}
 					
+					// Edge Case
 					if (board[i][j].column != board[0].length -1)
 					{
 						
@@ -291,6 +301,7 @@ public class Board
 						}
 					}
 					
+					// Edge Case
 					if (board[i][j].row != board.length -1)
 					{
 						if (board[i+1][j].isDoorway())
@@ -306,43 +317,41 @@ public class Board
 							adjacencies.add(board[i + 1][j]);
 						}
 					}
+					// Add (cell, adjacencies) to global adjacencie matrix
 					adjMatrix.put(board[i][j], adjacencies);
-					for (BoardCell adjacent : adjacencies)
-					{
-						System.out.print("Adj: " + adjacent.row + " " + adjacent.column + " ");
-						
-	
-					}
-					System.out.println();
+
+					// Debug Printing
+					// for (BoardCell adjacent : adjacencies)
+					// {
+					// 	System.out.print("Adj: " + adjacent.row + " " + adjacent.column + " ");
+					// }
+					// System.out.println();
 				}
-				
-	
 			}
 		}
 	}
 	
-	
-	
 	public void calcTargets(int row, int column, int pathLength)
 	{
+		// Reset from last cell
 		if (firstRun)
 		{
 			targets.clear();
 			visited.clear();
 			firstRun = false;
-
 		}
 		visited.add(board[row][column]);
 		Set<BoardCell> adjCells = getAdjList(row, column);
 		
 		for(BoardCell eachCell : adjCells) {
 			
+			// Have we never seen this cell before
 			if(!visited.contains(eachCell))
 			{
-
 				visited.add(eachCell);
 				if(pathLength == 1 || eachCell.isDoorway())
 				{
+					// Add call as potential target
 					targets.add(eachCell);
 				}
 				else
@@ -363,6 +372,7 @@ public class Board
 //		System.out.println();
 
 	}
+	// Return the list of adjacencies 
 	public Set<BoardCell> getAdjList(int row, int column)
 	{
 		Set<BoardCell> adjCells = adjMatrix.get(board[row][column]);
@@ -372,34 +382,40 @@ public class Board
 		}
 		return adjCells;
 	}
+	// Return the list of Targets
 	public Set<BoardCell> getTargets()
 	{
 		firstRun = true;
 		return targets;
 	}
 	
+	// Setter for the configs
 	public void setConfigFiles(String boardConfig, String legendConfig)
 	{
 		this.boardConfigFile = boardConfig;
 		this.legendConfig = legendConfig;
 		
 	}
+	// Getter for the legend
 	public Map<Character, String> getLegend()
 	{
 		return legend;
 	}
+	// Helper to get the cell
 	public BoardCell getCellAt(int row, int column)
 	{
 		return board[row][column];
 	}
 	
+	// Helper for rows
 	public int getNumRows()
 	{
 		return numRows;
 	}
+	
+	// Helper for the columns
 	public int getNumColumns()
 	{
 		return numColumns;
 	}
-
 }
