@@ -23,13 +23,11 @@ public class IntBoardTests
 	public void testAdjacency0() 
 	{
 		beforeAll();
-
 		BoardCell cell = board.getCell(0,0);
 		System.out.println(cell);
 		Set<BoardCell> testList = board.getAdjList(cell);
 		
 		assertEquals(2, testList.size());
-		
 	}
 	
 	@Test

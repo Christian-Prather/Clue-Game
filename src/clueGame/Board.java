@@ -41,17 +41,11 @@ public class Board
 		try 
 		{
 			loadRoomConfig();
+			loadBoardConfig();
 		} catch (BadConfigFormatException e) 
 		{
 			e.printStackTrace();
-		}
-		try 
-		{
-			loadBoardConfig();
-		}catch(BadConfigFormatException e){
-			e.printStackTrace();
-		}
-		calcAdjacencies();
+		} calcAdjacencies();
 	
 	}
 
