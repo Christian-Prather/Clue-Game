@@ -100,16 +100,17 @@ public class Board
 	{
 		// Set default walkway key for our room
 		Character walkwayKey = 'w';
-		
+		File file;
+		Scanner scanner;
+
 		// FileNotFoundException
 		try 
 		{
-			File file = new File(boardConfigFile);
-			Scanner scanner = new Scanner(file);
-		} catch (FileNotFoundException e) 
-		{
-			e.printStackTrace();
-		}
+			 file = new File(boardConfigFile);
+			 scanner = new Scanner(file);
+		
+			
+			
 			for (Map.Entry<Character, String> entry : legend.entrySet())
 			{
 				if(entry.getValue().equals("Walkway"))
@@ -137,8 +138,18 @@ public class Board
 
 			}
 			scanner.close();
+		}	
+		catch (FileNotFoundException e) 
+		{
+			e.printStackTrace();
+		}
+			
+			try 
+			{
+				 file = new File(boardConfigFile);
 
-			scanner = new Scanner(file);
+				 scanner = new Scanner(file);
+						
 			board = new BoardCell[numRows][numColumns];
 			int row = 0;
 			
@@ -211,10 +222,14 @@ public class Board
 
 			}
 			scanner.close();
-
-	
-				
 	}
+			catch (FileNotFoundException e) 
+			{
+				e.printStackTrace();
+			}
+
+		} 
+				
 
 	public void calcAdjacencies()
 	{
