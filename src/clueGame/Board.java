@@ -106,7 +106,10 @@ public class Board
 		{
 			File file = new File(boardConfigFile);
 			Scanner scanner = new Scanner(file);
-			
+		} catch (FileNotFoundException e) 
+		{
+			e.printStackTrace();
+		}
 			for (Map.Entry<Character, String> entry : legend.entrySet())
 			{
 				if(entry.getValue().equals("Walkway"))
@@ -209,10 +212,7 @@ public class Board
 			}
 			scanner.close();
 
-		} catch (FileNotFoundException e) 
-		{
-			e.printStackTrace();
-		}
+	
 				
 	}
 
