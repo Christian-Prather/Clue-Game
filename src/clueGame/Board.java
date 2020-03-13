@@ -34,7 +34,7 @@ public class Board
 	{
 		return theInstance;
 	}
-	
+
 	// Load room csv and the legend
 	public void initialize()
 	{
@@ -45,7 +45,8 @@ public class Board
 		} catch (BadConfigFormatException e) 
 		{
 			e.printStackTrace();
-		} calcAdjacencies();
+		} 
+		calcAdjacencies();
 	
 	}
 
@@ -62,18 +63,18 @@ public class Board
 				// Split by every comma
 				String[] elements = line.split(",");
 				// Extract the 3 elements from the line
-				Character tempChar = elements[0].charAt(0);
-				String tempRoomName = elements[1];
-				String tempType = elements[2].trim();
+				Character closetOrWalkwayChar = elements[0].charAt(0);
+				String closetOrWalkwayLegend = elements[1];
+				String objectType = elements[2].trim();
 				// Only two possible types
-				if (!tempType.contentEquals("Card"))
+				if (!objectType.contentEquals("Card"))
 				{
-					if (!tempType.contentEquals("Other"))
+					if (!objectType.contentEquals("Other"))
 					{
 						throw new BadConfigFormatException();
 					}
 				}
-				legend.put(tempChar, tempRoomName.trim());
+				legend.put(closetOrWalkwayChar, closetOrWalkwayLegend.trim());
 			}
 			scanner.close();
 
@@ -81,7 +82,6 @@ public class Board
 			e.printStackTrace();
 		}
 	}
-	
 	public void loadBoardConfig() throws BadConfigFormatException
 	{
 		// Set default walkway key for our room
@@ -93,11 +93,11 @@ public class Board
 		{
 			 file = new File(boardConfigFile);
 			 scanner = new Scanner(file);
-			for (Map.Entry<Character, String> entry : legend.entrySet())
+			for (Map.Entry<Character, String> legendCharToRoomMap : legend.entrySet())
 			{
-				if(entry.getValue().equals("Walkway"))
+				if(legendCharToRoomMap.getValue().equals("Walkway"))
 				{
-					walkwayKey = entry.getKey();
+					walkwayKey = legendCharToRoomMap.getKey();
 				}
 			}
 			// Get the dimensions (this is a dumb way of doing this but quick
@@ -116,7 +116,6 @@ public class Board
 				}
 				notFirstRun = true;
 				oldColumns = numColumns;
-
 			}
 			scanner.close();
 		}	
@@ -129,8 +128,8 @@ public class Board
 				 file = new File(boardConfigFile);
 				 scanner = new Scanner(file);
 						
-			board = new BoardCell[numRows][numColumns];
-			int row = 0;
+				 board = new BoardCell[numRows][numColumns];
+				 int row = 0;
 			// Parse room file
 			while(scanner.hasNextLine())
 			{
@@ -140,6 +139,7 @@ public class Board
 				while (column < elements.length)
 				{
 					BoardCell tempCell = new BoardCell(row, column);
+					
 					tempCell.initial = elements[column].charAt(0);
 						// Checking that the inital parsed from the board is actually in the legend
 						boolean match = false;
@@ -359,7 +359,6 @@ public class Board
 //
 //		}
 //		System.out.println();
-
 	}
 	// Return the list of adjacencies 
 	public Set<BoardCell> getAdjList(int row, int column)
