@@ -8,7 +8,6 @@ public class IntBoard {
  	private Map<BoardCell, Set<BoardCell>> adjacent = new HashMap<BoardCell, Set<BoardCell>>();
  	public static BoardCell[][] grid = new BoardCell[4][4];
 	
-
  	public IntBoard()
  	{
  		super();
@@ -31,7 +30,6 @@ public class IntBoard {
  			}
  			System.out.println();
  		}
- 		
  	}
 
 	public void calcAdjacencies()
@@ -71,8 +69,6 @@ public class IntBoard {
 				System.out.println(adjacent);
 			}
 		}
-			
-		
 	}
 	
 	public Set<BoardCell> getAdjList(BoardCell currentCell)
@@ -101,26 +97,11 @@ public class IntBoard {
 				}
 				visited.remove(eachCell);
 			}
-//			
-//			if(pathLength == 1 ) {
-//				targets.add(eachCell);
-//			}if(!visited.contains(eachCell)) {
-//				visited.add(eachCell);
-//			}else {
-//				calcTargets(eachCell, pathLength - 1);
-//			}if(pathLength != 1) {
-//				visited.remove(eachCell);
-//			}
-		
 		}
-//		for(BoardCell eachCell: adjCells) {
-//			visited.remove(eachCell);
-//		}
 	}
 	
 	public Set<BoardCell> getTargets()
 	{
-		
 		return targets;
 	}
 	
@@ -132,9 +113,7 @@ public class IntBoard {
 	public static void main(String[] args)
 	{
 		System.out.println("Here");
-		//Set<BoardCell> gameBoard = new HashSet<BoardCell>();
 	
-		
 		IntBoard board = new IntBoard();
 		BoardCell cell = board.getCell(0,0);
 		BoardCell test = board.getCell(1,0);
@@ -142,12 +121,8 @@ public class IntBoard {
 		System.out.println("CELLLL " +cell);
 		System.out.println("Test " + test);
 
-
 		Set<BoardCell> testList = board.getAdjList(cell);
 		System.out.println("SIZE:" + testList.size());
 		System.out.println("LIST:" + testList);
-
-		
-
 	}
 }	

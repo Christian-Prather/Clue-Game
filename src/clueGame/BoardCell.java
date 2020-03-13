@@ -8,7 +8,7 @@ public class BoardCell {
 	boolean doorway;
 	boolean walkway;
 	DoorDirection doorDirection;
-	
+
 	public BoardCell(int x, int y)
 	{
 		// Flipped for programmer preference
@@ -18,10 +18,8 @@ public class BoardCell {
 		this.doorway = false;
 		this.walkway = false;
 	}
-	
 	public Boolean isWalkway()
 	{
-		
 		return walkway;
 	}
 	
@@ -29,7 +27,6 @@ public class BoardCell {
 	{
 		return room;
 	}
-	
 	public Boolean isDoorway()
 	{
 		return doorway;
