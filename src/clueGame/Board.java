@@ -130,6 +130,7 @@ public class Board
 					throw new BadConfigFormatException();
 				}
 				notFirstRun = true;
+				oldColumns = numColumns;
 
 			}
 			scanner.close();
@@ -148,6 +149,21 @@ public class Board
 				{
 					BoardCell tempCell = new BoardCell(row, column);
 					tempCell.initial = elements[column].charAt(0);
+
+						// Checking that the inital parsed from the board is actually in the legend
+						boolean match = false;
+						for (Character key : legend.keySet())
+						{
+							if(tempCell.initial ==  key)
+							{
+								match = true;
+							}
+						}
+	
+						if (!match)
+						{
+							throw new BadConfigFormatException();
+						}
 
 					// This cell is a door
 					if (elements[column].length() > 1)
