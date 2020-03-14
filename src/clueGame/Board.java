@@ -118,26 +118,6 @@ public class Board
 				}
 				notFirstRun = true;
 				oldColumns = numColumns;
-
-			}
-			scanner.close();
-		}	
-		catch (FileNotFoundException e) 
-		{
-			e.printStackTrace();
-		}
-			try 
-			{
-				 file = new File(boardConfigFile);
-				 scanner = new Scanner(file);
-						
-				 board = new BoardCell[numRows][numColumns];
-				 int row = 0;
-			// Parse room file
-			while(scanner.hasNextLine())
-			{
-				String line = scanner.nextLine();
-				String[] elements = line.split(",");
 				int column = 0;
 				while (column < elements.length)
 				{
@@ -201,7 +181,8 @@ public class Board
 		}catch(FileNotFoundException e){
 				e.printStackTrace();
 			}
-		} 
+
+} 
 				
 
 	public void calcAdjacencies()
