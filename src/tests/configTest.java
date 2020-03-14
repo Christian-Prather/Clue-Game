@@ -59,9 +59,6 @@ public class configTest
 		clueGame.BoardCell room = board.getCellAt(8,3);
 		assertTrue(room.isDoorway());
 		assertEquals(DoorDirection.DOWN, room.getDoorDirection());
-		
-		
-
 
 		room = board.getCellAt(12,18);
 
@@ -78,7 +75,6 @@ public class configTest
 		
 		room = board.getCellAt(1,0);
 		assertTrue(room.isWalkway());
-		
 	}
 	
 	@Test
@@ -103,12 +99,8 @@ public class configTest
 		
 		assertEquals((Character)'Y', board.getCellAt(9, 20).getInitial());
 		assertEquals((Character)'X', board.getCellAt(17, 20).getInitial());
-
-
 	}
-
-
-
+	
 	private Object character(Character initial) {
 		// TODO Auto-generated method stub
 		return null;

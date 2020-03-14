@@ -12,7 +12,6 @@ import experiment.BoardCell;
 
 public class testAdjTargets 
 {
-	
 	private static Board board;
 	@BeforeClass
 	public static void setUp() {
@@ -23,7 +22,6 @@ public class testAdjTargets
 		// Initialize will load BOTH config files 
 		board.initialize();
 	}
-	
 	//Check that adjacencies for walkway are only on walkway unless
 	// door that is enterable
 	@Test
@@ -60,7 +58,6 @@ public class testAdjTargets
 				assertFalse(cells.contains(board.getCellAt(-1, 9)));
 			}
 		}
-
 	}
 	
 	//Check that we cant go into a room without a doorway
@@ -72,7 +69,6 @@ public class testAdjTargets
 		
 		cells = board.getAdjList(3, 13);
 		assertFalse(cells.contains(board.getCellAt(3, 14)));
-
 	}
 	
 	// Check that we can go into doorway
@@ -94,7 +90,6 @@ public class testAdjTargets
 		//Left
 		cells = board.getAdjList(20, 6);
 		assertTrue(cells.contains(board.getCellAt(20, 7)));
-	
 	}
 	
 	// Check locations that are doorways should only let you in to room

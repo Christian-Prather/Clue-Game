@@ -34,25 +34,18 @@ public class Board
 	{
 		return theInstance;
 	}
-	
+
 	// Load room csv and the legend
 	public void initialize()
 	{
 		try 
 		{
 			loadRoomConfig();
+			loadBoardConfig();
 		} catch (BadConfigFormatException e) 
 		{
 			e.printStackTrace();
-		}
-
-		try 
-		{
-			loadBoardConfig();
-		} catch (BadConfigFormatException e)
-		{
-			e.printStackTrace();
-		}
+		} 
 		calcAdjacencies();
 	
 	}
@@ -63,62 +56,50 @@ public class Board
 		try {
 			File file = new File(legendConfig);
 			Scanner scanner = new Scanner(file);
-
 			// Grab every line of the room config (legend) one at a time
 			while(scanner.hasNextLine())
 			{
 				String line = scanner.nextLine();
 				// Split by every comma
 				String[] elements = line.split(",");
-				
 				// Extract the 3 elements from the line
-				Character tempChar = elements[0].charAt(0);
-				String tempRoomName = elements[1];
-				String tempType = elements[2].trim();
-				
+				Character closetOrWalkwayChar = elements[0].charAt(0);
+				String closetOrWalkwayLegend = elements[1];
+				String objectType = elements[2].trim();
 				// Only two possible types
-				if (!tempType.contentEquals("Card"))
+				if (!objectType.contentEquals("Card"))
 				{
-					if (!tempType.contentEquals("Other"))
+					if (!objectType.contentEquals("Other"))
 					{
 						throw new BadConfigFormatException();
 					}
 				}
-				
-				legend.put(tempChar, tempRoomName.trim());
-			
+				legend.put(closetOrWalkwayChar, closetOrWalkwayLegend.trim());
 			}
 			scanner.close();
 
-		} catch (FileNotFoundException e) 
-		{
+		}catch(FileNotFoundException e){
 			e.printStackTrace();
 		}
 	}
-	
 	public void loadBoardConfig() throws BadConfigFormatException
 	{
 		// Set default walkway key for our room
 		Character walkwayKey = 'w';
 		File file;
 		Scanner scanner;
-
-		// FileNotFoundException
+		///file not found exception
 		try 
 		{
 			 file = new File(boardConfigFile);
 			 scanner = new Scanner(file);
-		
-			
-			
-			for (Map.Entry<Character, String> entry : legend.entrySet())
+			for (Map.Entry<Character, String> legendCharToRoomMap : legend.entrySet())
 			{
-				if(entry.getValue().equals("Walkway"))
+				if(legendCharToRoomMap.getValue().equals("Walkway"))
 				{
-					walkwayKey = entry.getKey();
+					walkwayKey = legendCharToRoomMap.getKey();
 				}
 			}
-			
 			// Get the dimensions (this is a dumb way of doing this but quick
 			// Check that there are consistent column numbers
 			int oldColumns = 0; 
@@ -138,12 +119,31 @@ public class Board
 				notFirstRun = true;
 				oldColumns = numColumns;
 
+			}
+			scanner.close();
+		}	
+		catch (FileNotFoundException e) 
+		{
+			e.printStackTrace();
+		}
+			try 
+			{
+				 file = new File(boardConfigFile);
+				 scanner = new Scanner(file);
+						
+				 board = new BoardCell[numRows][numColumns];
+				 int row = 0;
+			// Parse room file
+			while(scanner.hasNextLine())
+			{
+				String line = scanner.nextLine();
+				String[] elements = line.split(",");
 				int column = 0;
 				while (column < elements.length)
 				{
 					BoardCell tempCell = new BoardCell(row, column);
+					
 					tempCell.initial = elements[column].charAt(0);
-
 						// Checking that the inital parsed from the board is actually in the legend
 						boolean match = false;
 						for (Character key : legend.keySet())
@@ -152,9 +152,7 @@ public class Board
 							{
 								match = true;
 							}
-						}
-	
-						if (!match)
+						} if (!match)
 						{
 							throw new BadConfigFormatException();
 						}
@@ -182,7 +180,6 @@ public class Board
 							tempCell.doorDirection = DoorDirection.NONE;
 							break;
 						};
-						
 					}
 					// Cell is a walkway		
 					else if(tempCell.initial == walkwayKey)
@@ -199,16 +196,12 @@ public class Board
 					column++;	
 				}
 				row++;
-
 			}
 			scanner.close();
-	}
-			catch (FileNotFoundException e) 
-			{
+		}catch(FileNotFoundException e){
 				e.printStackTrace();
 			}
-
-} 
+		} 
 				
 
 	public void calcAdjacencies()
@@ -255,7 +248,6 @@ public class Board
 					}
 					System.out.println();
 				}
-
 				///////////////////////////////////Not Doorway///////////////////////////////////////////////
 				// Cell not a door or room
 				else if(!board[i][j].isRoom())
@@ -285,34 +277,27 @@ public class Board
 							if (board[i][j-1].doorDirection == DoorDirection.RIGHT)
 							{
 								adjacencies.add(board[i][j-1]);
-	
 							}
-						}
-						else if (!board[i][j-1].isRoom())
+						}else if(!board[i][j-1].isRoom())
 						{
 							adjacencies.add(board[i][j-1]);
 						}
-
 					}
 					
 					// Edge Case
 					if (board[i][j].column != numColumns -1)
 					{
-						
 						if (board[i][j+1].isDoorway())
 						{					
 							if (board[i][j+1].doorDirection == DoorDirection.LEFT)
 							{
 								adjacencies.add(board[i][j+1]);
-	
 							}
-						}
-						else if(!board[i][j+1].isRoom())
+						}else if(!board[i][j+1].isRoom())
 						{
 							adjacencies.add(board[i][j+1]);
 						}
 					}
-					
 					// Edge Case
 					if (board[i][j].row != numRows -1)
 					{
@@ -321,7 +306,6 @@ public class Board
 							if ((board[i+1][j].doorDirection == DoorDirection.UP))
 							{
 								adjacencies.add(board[i + 1][j]);
-		
 							}
 						}
 						else if (!board[i+1][j].isRoom())
@@ -331,7 +315,6 @@ public class Board
 					}
 					// Add (cell, adjacencies) to global adjacencie matrix
 					adjMatrix.put(board[i][j], adjacencies);
-
 					// Debug Printing
 					// for (BoardCell adjacent : adjacencies)
 					// {
@@ -356,7 +339,6 @@ public class Board
 		Set<BoardCell> adjCells = getAdjList(row, column);
 		
 		for(BoardCell eachCell : adjCells) {
-			
 			// Have we never seen this cell before
 			if(!visited.contains(eachCell))
 			{
@@ -372,7 +354,6 @@ public class Board
 				}
 				visited.remove(eachCell);
 			}
-		
 		}
 // 		Leave me for future debugging
 //		System.out.print("Cell Path "+ pathLength +" " + row + " " + column + "| " + "Lenght " + targets.size());
@@ -382,7 +363,6 @@ public class Board
 //
 //		}
 //		System.out.println();
-
 	}
 	// Return the list of adjacencies 
 	public Set<BoardCell> getAdjList(int row, int column)
@@ -406,7 +386,6 @@ public class Board
 	{
 		this.boardConfigFile = boardConfig;
 		this.legendConfig = legendConfig;
-		
 	}
 	// Getter for the legend
 	public Map<Character, String> getLegend()
@@ -418,13 +397,11 @@ public class Board
 	{
 		return board[row][column];
 	}
-	
 	// Helper for rows
 	public int getNumRows()
 	{
 		return numRows;
 	}
-	
 	// Helper for the columns
 	public int getNumColumns()
 	{
