@@ -1,0 +1,338 @@
+Author: Alex Langfield and Christian Prather
+
+Git Log
+----------------------------------------------------
+1) Cleaned up code, and all whitespace, got rid of unnecessary debugging
+2) Removed redundant try/catch exception
+3) Gave code proper naming conventions
+4) Parsing file once only, not multiple times
+5) Styling
+6) Added reactor log file
+7) Fixed merge conflict
+8) Refractor moved filenotfound catch around just file opening
+9) Fixed all test issues
+
+csm-wl-dhcp-196-170:Clue-Game alexlangfield$ git log
+commit fd515d27fb6843dd9f66d73149825ab40a3faa9e (HEAD -> master, origin/master, origin/HEAD)
+Author: Christian Prather <clemsbach@gmail.com>
+Date:   Fri Mar 13 18:29:07 2020 -0600
+
+    Fixed merge conflict
+
+commit c2b359752f0fcb902c4a1af3a52a356bc6d43b93
+Merge: 4793420 44ed915
+Author: Christian Prather <clemsbach@gmail.com>
+Date:   Fri Mar 13 18:26:04 2020 -0600
+
+    Merge branch 'master' of https://github.com/Christian-Prather/Clue-Game
+
+commit 47934207839c43314b9f38891c09bf18b37e9b85
+Author: Christian Prather <clemsbach@gmail.com>
+Date:   Fri Mar 13 18:23:24 2020 -0600
+
+    Added before to refactor log
+
+commit fced886918d1219f0620e3c1d644b9e0107ba6f3
+Author: Christian Prather <clemsbach@gmail.com>
+Date:   Fri Mar 13 18:20:25 2020 -0600
+
+    Added reactor log file
+
+commit 3b6dc5228fe12d8e8240d04d97c4ad8142f91592
+Author: Christian Prather <clemsbach@gmail.com>
+Date:   Fri Mar 13 18:20:06 2020 -0600
+
+    Styling
+
+commit b21f6a48bc7326267f042b058d242c1bc85b25a9
+Author: Christian Prather <clemsbach@gmail.com>
+Date:   Fri Mar 13 18:16:59 2020 -0600
+
+    Only parsing File once
+
+commit 44ed91537002019cd9d34e2a326553751faf015b
+Author: Alex <alangfield@mymail.mines.edu>
+Date:   Fri Mar 13 14:58:34 2020 -0600
+
+    Gave code proper naming conventions
+
+commit a9bde5189c573c2cb281d0bf8e7ef972d376b5ac
+Author: Alex <alangfield@mymail.mines.edu>
+Date:   Fri Mar 13 14:22:09 2020 -0600
+
+    Cleaned up a try/catch exception
+
+commit 032d17e8037d9e3a3bf24f4085b8fbe04913db34
+Author: Alex <alangfield@mymail.mines.edu>
+Date:   Fri Mar 13 14:17:59 2020 -0600
+
+    Cleaned up code, and all whitespace, got rid of unnecessary debugging outputs
+
+commit d5f7b48fe528c92baf207bbe85a8fafcf1e7d5ab
+Author: Christian Prather <clemsbach@gmail.com>
+Date:   Fri Mar 13 11:15:06 2020 -0600
+
+    Reverted try catch
+
+commit 53c8060f188c43227a159af5b1db97dddc3f4a3e
+Author: Christian Prather <clemsbach@gmail.com>
+Date:   Fri Mar 13 10:58:02 2020 -0600
+
+    Refactor moved filenotfound catch around just file opening
+
+commit aa736ee35d5803499cc16ebc207c37c0397a11c1
+Author: Christian Prather <clemsbach@gmail.com>
+Date:   Fri Mar 13 10:51:54 2020 -0600
+
+
+
+//////////////////////////////////BEFORE//////////////////////////////
+
+	public void loadBoardConfig() throws BadConfigFormatException
+	{
+		// Set default walkway key for our room
+		Character walkwayKey = 'w';
+		File file;
+		Scanner scanner;
+
+		// FileNotFoundException
+		try 
+		{
+			 file = new File(boardConfigFile);
+			 scanner = new Scanner(file);
+		
+			
+			
+			for (Map.Entry<Character, String> entry : legend.entrySet())
+			{
+				if(entry.getValue().equals("Walkway"))
+				{
+					walkwayKey = entry.getKey();
+				}
+			}
+			
+			// Get the dimensions (this is a dumb way of doing this but quick
+			// Check that there are consistent column numbers
+			int oldColumns = 0; 
+			boolean notFirstRun = false;
+			while (scanner.hasNextLine())
+			{
+				numRows++;
+				String line = scanner.nextLine();
+				String[] elements = line.split(",");
+				numColumns = elements.length;
+				if (numColumns != oldColumns && notFirstRun)
+				{
+					throw new BadConfigFormatException();
+				}
+				notFirstRun = true;
+				oldColumns = numColumns;
+
+			}
+			scanner.close();
+		}	
+		catch (FileNotFoundException e) 
+		{
+			e.printStackTrace();
+		}
+			
+			try 
+			{
+				 file = new File(boardConfigFile);
+
+				 scanner = new Scanner(file);
+						
+			board = new BoardCell[numRows][numColumns];
+			int row = 0;
+			
+			// Parse room file
+			while(scanner.hasNextLine())
+			{
+				String line = scanner.nextLine();
+				String[] elements = line.split(",");
+				int column = 0;
+				while (column < elements.length)
+				{
+					BoardCell tempCell = new BoardCell(row, column);
+					tempCell.initial = elements[column].charAt(0);
+
+						// Checking that the inital parsed from the board is actually in the legend
+						boolean match = false;
+						for (Character key : legend.keySet())
+						{
+							if(tempCell.initial ==  key)
+							{
+								match = true;
+							}
+						}
+	
+						if (!match)
+						{
+							throw new BadConfigFormatException();
+						}
+
+					// This cell is a door
+					if (elements[column].length() > 1)
+					{
+						// Multi Character spot (door)
+						tempCell.doorway = true;
+						switch (elements[column].charAt(1))
+						{
+						case 'U':
+							tempCell.doorDirection = DoorDirection.UP;
+							break;
+						case 'D':
+							tempCell.doorDirection = DoorDirection.DOWN;
+							break;
+						case 'L':
+							tempCell.doorDirection = DoorDirection.LEFT;
+							break;
+						case 'R':
+							tempCell.doorDirection = DoorDirection.RIGHT;
+							break;
+						case 'N':
+							tempCell.doorDirection = DoorDirection.NONE;
+							break;
+						};
+						
+					}
+					// Cell is a walkway		
+					else if(tempCell.initial == walkwayKey)
+					{
+						tempCell.walkway = true;
+					}
+					// Cell is a room
+					else
+					{
+						tempCell.room = true;
+					}
+					// Add cell to board matrix
+					board[row][column] = tempCell;
+					column++;	
+				}
+				row++;
+
+			}
+			scanner.close();
+	}
+			catch (FileNotFoundException e) 
+			{
+				e.printStackTrace();
+			}
+
+		} 
+//////////////////////////////////AFTER///////////////////////////////
+
+	public void loadBoardConfig() throws BadConfigFormatException
+	{
+		// Set default walkway key for our room
+		Character walkwayKey = 'w';
+		File file;
+		Scanner scanner;
+
+		// FileNotFoundException
+		try 
+		{
+			 file = new File(boardConfigFile);
+			 scanner = new Scanner(file);
+		
+			
+			
+			for (Map.Entry<Character, String> entry : legend.entrySet())
+			{
+				if(entry.getValue().equals("Walkway"))
+				{
+					walkwayKey = entry.getKey();
+				}
+			}
+			
+			// Get the dimensions (this is a dumb way of doing this but quick
+			// Check that there are consistent column numbers
+			int oldColumns = 0; 
+			boolean notFirstRun = false;
+			board = new BoardCell[MAX_BOARD_SIZE][MAX_BOARD_SIZE];
+			int row = 0;
+			while (scanner.hasNextLine())
+			{
+				numRows++;
+				String line = scanner.nextLine();
+				String[] elements = line.split(",");
+				numColumns = elements.length;
+				if (numColumns != oldColumns && notFirstRun)
+				{
+					throw new BadConfigFormatException();
+				}
+				notFirstRun = true;
+				oldColumns = numColumns;
+
+				int column = 0;
+				while (column < elements.length)
+				{
+					BoardCell tempCell = new BoardCell(row, column);
+					tempCell.initial = elements[column].charAt(0);
+
+						// Checking that the inital parsed from the board is actually in the legend
+						boolean match = false;
+						for (Character key : legend.keySet())
+						{
+							if(tempCell.initial ==  key)
+							{
+								match = true;
+							}
+						}
+	
+						if (!match)
+						{
+							throw new BadConfigFormatException();
+						}
+
+					// This cell is a door
+					if (elements[column].length() > 1)
+					{
+						// Multi Character spot (door)
+						tempCell.doorway = true;
+						switch (elements[column].charAt(1))
+						{
+						case 'U':
+							tempCell.doorDirection = DoorDirection.UP;
+							break;
+						case 'D':
+							tempCell.doorDirection = DoorDirection.DOWN;
+							break;
+						case 'L':
+							tempCell.doorDirection = DoorDirection.LEFT;
+							break;
+						case 'R':
+							tempCell.doorDirection = DoorDirection.RIGHT;
+							break;
+						case 'N':
+							tempCell.doorDirection = DoorDirection.NONE;
+							break;
+						};
+						
+					}
+					// Cell is a walkway		
+					else if(tempCell.initial == walkwayKey)
+					{
+						tempCell.walkway = true;
+					}
+					// Cell is a room
+					else
+					{
+						tempCell.room = true;
+					}
+					// Add cell to board matrix
+					board[row][column] = tempCell;
+					column++;	
+				}
+				row++;
+
+			}
+			scanner.close();
+	}
+			catch (FileNotFoundException e) 
+			{
+				e.printStackTrace();
+			}
+
+} 
