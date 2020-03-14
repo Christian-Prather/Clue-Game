@@ -208,7 +208,7 @@ public class Board
 				e.printStackTrace();
 			}
 
-		} 
+} 
 				
 
 	public void calcAdjacencies()
