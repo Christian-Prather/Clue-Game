@@ -123,6 +123,8 @@ public class Board
 			// Check that there are consistent column numbers
 			int oldColumns = 0; 
 			boolean notFirstRun = false;
+			board = new BoardCell[MAX_BOARD_SIZE][MAX_BOARD_SIZE];
+			int row = 0;
 			while (scanner.hasNextLine())
 			{
 				numRows++;
@@ -136,28 +138,6 @@ public class Board
 				notFirstRun = true;
 				oldColumns = numColumns;
 
-			}
-			scanner.close();
-		}	
-		catch (FileNotFoundException e) 
-		{
-			e.printStackTrace();
-		}
-			
-			try 
-			{
-				 file = new File(boardConfigFile);
-
-				 scanner = new Scanner(file);
-						
-			board = new BoardCell[numRows][numColumns];
-			int row = 0;
-			
-			// Parse room file
-			while(scanner.hasNextLine())
-			{
-				String line = scanner.nextLine();
-				String[] elements = line.split(",");
 				int column = 0;
 				while (column < elements.length)
 				{
@@ -233,16 +213,17 @@ public class Board
 
 	public void calcAdjacencies()
 	{
+		System.out.println(numRows + " " + numColumns);
 		// Loop through every row
-		for (int i = 0; i < board.length; i++)
+		for (int i = 0; i < numRows; i++)
 		{
 			// Loop through each column
-			for (int j = 0; j < board[0].length; j++)
+			for (int j = 0; j < numColumns; j++)
 			{
+			
 				// List of adjacencies for a cell
 				Set<BoardCell> adjacencies = new HashSet<BoardCell>();
-				// System.out.println("GRID: " + board[i][j].row + " " + board[i][j].column);
-			
+
 				// Is the cell a doorway (has special rules)
 				if (board[i][j].isDoorway())
 				{
@@ -315,7 +296,7 @@ public class Board
 					}
 					
 					// Edge Case
-					if (board[i][j].column != board[0].length -1)
+					if (board[i][j].column != numColumns -1)
 					{
 						
 						if (board[i][j+1].isDoorway())
@@ -333,7 +314,7 @@ public class Board
 					}
 					
 					// Edge Case
-					if (board[i][j].row != board.length -1)
+					if (board[i][j].row != numRows -1)
 					{
 						if (board[i+1][j].isDoorway())
 						{
