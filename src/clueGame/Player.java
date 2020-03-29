@@ -3,6 +3,7 @@ package clueGame;
 // All its variables and methods should only be called from Board
 
 // Implememts solution
+
 public class Player 
 {
     private String playerName;

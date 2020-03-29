@@ -23,7 +23,10 @@ public class Board
 	private Map<BoardCell, Set<BoardCell>> adjMatrix = new HashMap<BoardCell, Set<BoardCell>>();
 	private Set<BoardCell> targets = new HashSet<BoardCell>();
 	private Set<BoardCell> visited = new HashSet<BoardCell>();
+	// For the cards
 	private ArrayList<Player> suspects = new ArrayList<People>();
+	private ArrayList<Card> deck = new ArrayList<Deck>();
+
 	private Card theCard;
 
 
@@ -401,7 +404,7 @@ public class Board
 			// 	String line = scanner.nextLine();
 			// 	String[] elements = line.split(",");
 
-			// 	// Make temp person object
+			// 	// Make temp person object human or computer?
 			// 	Person person;
 			// 	// Parse the people
 			// 	person.name = elements[0];
@@ -414,13 +417,36 @@ public class Board
 
 
 
-			}
+			//}
 
 
 		catch(BadConfigFormatException e){
 				e.printStackTrace();
 			}
 		}
+	}
+
+	// Not sure how we are suppose to be doing this?
+	public void makeCards()
+	{
+		// Loop through every cell in board if room make room card
+		// Loop through every Player make a player card
+		// Loop though every weapon file and make a weapon card
+	}
+
+	public void selectAnswer()
+	{
+
+	}
+
+	public Card handleSuggestion()
+	{
+
+	}
+
+	public boolean checkAccusation(Solution accusation)
+	{
+
 	}
 
 }
