@@ -1,0 +1,11 @@
+package clueGame;
+
+public class ComputerPlayer extends Player 
+{
+    public BoardCell pickLocation(Set<BoardCell> target)
+    {
+        return null;
+    }
+    public void makeAccusation ();
+    public void createSuggestion();
+}
