@@ -55,7 +55,7 @@ public class gameSetupTests
 
         Player fourthPlayer = board.suspects.get(3);
         assertEquals("Mrs.Peacock", fourthPlayer.getPlayerName());
-        assertEquals(Color.red, fourthPlayer.getPlayerColor());
+        assertEquals(Color.green, fourthPlayer.getPlayerColor());
         assertEquals(15, fourthPlayer.getPlayerRow());
         assertEquals(3, fourthPlayer.getPlayerColumn());
 
@@ -63,7 +63,7 @@ public class gameSetupTests
         assertEquals("Mrs.Meadow-Brook", lastPlayer.getPlayerName());
         assertEquals(Color.pink, lastPlayer.getPlayerColor());
         assertEquals(12, lastPlayer.getPlayerRow());
-        assertEquals(116, lastPlayer.getPlayerColumn());
+        assertEquals(16, lastPlayer.getPlayerColumn());
 
     }
 
@@ -74,7 +74,8 @@ public class gameSetupTests
         // Tests the creation of cards from config files
 
         // Test the number of cards made is correct
-        assertEquals(25, board.deck);
+    	System.out.println(board.deck.size() + "Balls");
+        assertEquals(23, board.deck.size());
 
         int weaponCards = 0;
         int roomCards = 0;
@@ -103,7 +104,7 @@ public class gameSetupTests
         assertEquals(8, personCards);
 
         // Check that there are 11 rooms
-        assertEquals(11, roomCards);
+        assertEquals(9, roomCards);
 
     }
 

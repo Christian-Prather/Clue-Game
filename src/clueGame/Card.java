@@ -19,4 +19,13 @@ public class Card
     {
     	return cardName;
     }
+    public void setCardName(String cardName)
+    {
+        this.cardName = cardName;
+    }
+    
+    public void setCardType(CardType cardType)
+    {
+    	this.cardType = cardType;
+    }
 }

@@ -17,6 +17,20 @@ public class Player
 		return null;
     };
 
+    public void setPlayerName(String playerName) {
+    	this.playerName = playerName;
+    }
+    public void setRow(int row) {
+    	this.row = row;
+    }
+    public void setColumn(int column) {
+    	this.column = column;
+    }
+    public void setColor(Color color) {
+    	this.color = color;
+    }
+    
+
     public String getPlayerName()
     {
     	return this.playerName;

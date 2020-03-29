@@ -4,11 +4,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
+import java.awt.Color; // BE SURE TO USE THIS IMPORT
+// not the one Eclipse suggests
+import java.lang.reflect.Field;
 
 import clueGame.BoardCell;
 import clueGame.Card;
@@ -30,7 +34,9 @@ public class Board
 	private Set<BoardCell> visited = new HashSet<BoardCell>();
 	// For the cards
 	public ArrayList<Player> suspects = new ArrayList<Player>();
+
 	public ArrayList<Card> deck = new ArrayList<Card>();
+	public ArrayList<String> rooms = new ArrayList<String>();
 	public Map<Player, ArrayList<Card>> playerCards = new HashMap<Player, ArrayList<Card>>();
 
 	private Card theCard;
@@ -85,6 +91,10 @@ public class Board
 					{
 						throw new BadConfigFormatException();
 					}
+				}
+				if (objectType.equals("Card"))
+				{
+					rooms.add(elements[1]);
 				}
 				legend.put(closetOrWalkwayChar, closetOrWalkwayLegend.trim());
 			}
@@ -400,53 +410,115 @@ public class Board
 	{
 		return numColumns;
 	}
-	public void loadPersonConfig() throws BadConfigFormatException{
 	
-	//	try{
-			// File file = new File("suspects.txt");
-			// Scanner scanner = new Scanner(file);
-			// while(scanner.hasNextLine())
-			// {
-			// 	String line = scanner.nextLine();
-			// 	String[] elements = line.split(",");
-
-			// 	// Make temp person object human or computer?
-//			if (elements[4] == "human")
-//			{
-//				HumanPlayer tempPlayer = new HumanPlayer;
-//			}
-//			else
-//			{
-//				ComputerPlayer tempPlayer = new ComputerPlayer;
-//			}
-
-			// 	// Parse the people
-			// 	tempPlayer.name = elements[0];
-			// 	tempPlayer.color = elements[1];
-				// tempPlayer.row = elements[2];
-				// tempPlayer.column = elements[3];
-			
-
-			// 	// Add person object to global list of suspects
-			// 	suspects.add(tempPlayer);
-
-
-
-			//}
-
-//
-//		catch(BadConfigFormatException e){
-//				e.printStackTrace();
-//			}
-//		}
+	// Be sure to trim the color, we don't want spaces around the name
+	public Color convertColor(String strColor) {
+	 Color color;
+	 try {
+	 // We can use reflection to convert the string to a color
+	 Field field = Class.forName("java.awt.Color").getField(strColor.trim());
+	 color = (Color)field.get(null);
+	 } catch (Exception e) {
+	 color = null; // Not defined
+	 }
+	 return color;
 	}
+	
+	public void loadPersonConfig() throws BadConfigFormatException
+	{
+		File file;
+		Scanner scanner;
+	
+		try
+		{
+			file = new File("suspects.txt");
+			scanner = new Scanner(file);
+			while(scanner.hasNextLine())
+			{
+				String line = scanner.nextLine();
+				String[] elements = line.split(",");
+
+					// Make temp person object human or computer?
+				if (elements[4].equals("human"))
+				{
+					Player tempPlayer = new HumanPlayer();
+					tempPlayer.setPlayerName(elements[0]);
+					tempPlayer.setColor(convertColor(elements[1]));
+					tempPlayer.setRow(Integer.valueOf(elements[2]));
+					tempPlayer.setColumn(Integer.valueOf(elements[3]));
+					// Add person object to global list of suspects
+					suspects.add(tempPlayer);
+				
+				}
+				else
+				{
+					Player tempPlayer = new ComputerPlayer();
+					tempPlayer.setPlayerName(elements[0]);
+					tempPlayer.setColor(convertColor(elements[1]));
+					tempPlayer.setRow(Integer.valueOf(elements[2]));
+					tempPlayer.setColumn(Integer.valueOf(elements[3]));
+					// Add person object to global list of suspects
+					suspects.add(tempPlayer);
+				}
+
+			}
+		}
+		catch(FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+	}
+		
 
 	// Not sure how we are suppose to be doing this?
 	public void makeCards()
 	{
 		// Loop through every cell in board if room make room card
+		 System.out.println("ROOOOM" + rooms.size());
+
+		for (String room : rooms)
+		{
+			
+			Card roomCard = new Card();
+			roomCard.setCardName(room);
+			roomCard.setCardType(CardType.ROOM);
+			deck.add(roomCard);
+		}
+		
 		// Loop through every Player make a player card
+		for (Player player : suspects)
+		{
+			System.out.println("SUS" + suspects.size());
+
+			Card playerCard = new Card();
+			playerCard.setCardName(player.getPlayerName());
+			playerCard.setCardType(CardType.PERSON);
+			deck.add(playerCard);
+		}
 		// Loop though every weapon file and make a weapon card
+		File file;
+		Scanner scanner;
+	
+		try
+		{
+			file = new File("weapons.txt");
+			scanner = new Scanner(file);
+			while(scanner.hasNextLine())
+			{
+				String line = scanner.nextLine();
+				String[] elements = line.split(",");
+
+				Card weaponCard = new Card();
+				weaponCard.setCardName(elements[0]);
+				weaponCard.setCardType(CardType.WEAPON);
+				deck.add(weaponCard);
+
+			}
+		}
+		catch(FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	// Not sure how we are suppose to be doing this?
@@ -456,21 +528,18 @@ public class Board
 	// 1 1 1 1 1 1 1 1 
 	public void dealCards()
 	{
-		// Collections.shuffle(deck);
-		// int index = 0;
-		// int newIndex = 0;
-		// while(deck.size() != 0){
-		// 	playerCards.put(person[newIndex], deck.at(0));
-		// 	deck.remove(index);
-		// 	newIndex++;
-		// }
-		// for(Card currentCard : deck){
-            //shuffle cards so that every card in the ARRlist is random
-            //deal a card to every player in order
-            //remove card dealt from arrlist
-            //if arrlist empty break;
-            //push player card into map, so we know who has what cards
-        // }
+		 Collections.shuffle(deck);
+		 for (Card card : deck)
+		 {
+			 System.out.println(card.getCardName());
+		 }
+		 int index = 0;
+		 int newIndex = 0;
+//		 while(deck.size() != 0){
+////		 	playerCards.put(person[newIndex], deck.at(0));
+////		 	deck.remove(index);
+////		 	newIndex++;
+//		 }
 	}
 
 	public void selectAnswer()
@@ -489,5 +558,6 @@ public class Board
 		return false;
 
 	}
+	
 
 }
