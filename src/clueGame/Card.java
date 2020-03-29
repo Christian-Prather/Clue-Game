@@ -7,7 +7,16 @@ public class Card
     private CardType cardType;
     public boolean equals()
     {
-        return null;
+        return false;
     };
 
+    public CardType getCardType()
+    {
+    	return cardType;
+    }
+    
+    public String getCardName()
+    {
+    	return cardName;
+    }
 }

@@ -3,6 +3,7 @@ package clueGame;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -10,6 +11,10 @@ import java.util.Scanner;
 import java.util.Set;
 
 import clueGame.BoardCell;
+import clueGame.Card;
+import clueGame.Player;
+
+
 
 public class Board 
 {
@@ -24,8 +29,9 @@ public class Board
 	private Set<BoardCell> targets = new HashSet<BoardCell>();
 	private Set<BoardCell> visited = new HashSet<BoardCell>();
 	// For the cards
-	private ArrayList<Player> suspects = new ArrayList<People>();
-	private ArrayList<Card> deck = new ArrayList<Deck>();
+	public ArrayList<Player> suspects = new ArrayList<Player>();
+	public ArrayList<Card> deck = new ArrayList<Card>();
+	public Map<Player, ArrayList<Card>> playerCards = new HashMap<Player, ArrayList<Card>>();
 
 	private Card theCard;
 
@@ -396,7 +402,7 @@ public class Board
 	}
 	public void loadPersonConfig() throws BadConfigFormatException{
 	
-		try{
+	//	try{
 			// File file = new File("suspects.txt");
 			// Scanner scanner = new Scanner(file);
 			// while(scanner.hasNextLine())
@@ -405,25 +411,34 @@ public class Board
 			// 	String[] elements = line.split(",");
 
 			// 	// Make temp person object human or computer?
-			// 	Person person;
+//			if (elements[4] == "human")
+//			{
+//				HumanPlayer tempPlayer = new HumanPlayer;
+//			}
+//			else
+//			{
+//				ComputerPlayer tempPlayer = new ComputerPlayer;
+//			}
+
 			// 	// Parse the people
-			// 	person.name = elements[0];
-			// 	person.color = elements[1];
-				// person.row = elements[2];
-				// person.column = elements[3];
+			// 	tempPlayer.name = elements[0];
+			// 	tempPlayer.color = elements[1];
+				// tempPlayer.row = elements[2];
+				// tempPlayer.column = elements[3];
+			
 
 			// 	// Add person object to global list of suspects
-			// 	suspects.add(person);
+			// 	suspects.add(tempPlayer);
 
 
 
 			//}
 
-
-		catch(BadConfigFormatException e){
-				e.printStackTrace();
-			}
-		}
+//
+//		catch(BadConfigFormatException e){
+//				e.printStackTrace();
+//			}
+//		}
 	}
 
 	// Not sure how we are suppose to be doing this?
@@ -434,6 +449,30 @@ public class Board
 		// Loop though every weapon file and make a weapon card
 	}
 
+	// Not sure how we are suppose to be doing this?
+
+	// A b c d e f g h
+	// 1 1 1 1 1 1 1 1 
+	// 1 1 1 1 1 1 1 1 
+	public void dealCards()
+	{
+		// Collections.shuffle(deck);
+		// int index = 0;
+		// int newIndex = 0;
+		// while(deck.size() != 0){
+		// 	playerCards.put(person[newIndex], deck.at(0));
+		// 	deck.remove(index);
+		// 	newIndex++;
+		// }
+		// for(Card currentCard : deck){
+            //shuffle cards so that every card in the ARRlist is random
+            //deal a card to every player in order
+            //remove card dealt from arrlist
+            //if arrlist empty break;
+            //push player card into map, so we know who has what cards
+        // }
+	}
+
 	public void selectAnswer()
 	{
 
@@ -441,11 +480,13 @@ public class Board
 
 	public Card handleSuggestion()
 	{
+		return null;
 
 	}
 
 	public boolean checkAccusation(Solution accusation)
 	{
+		return false;
 
 	}
 
