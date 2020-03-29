@@ -23,7 +23,10 @@ public class Board
 	private Map<BoardCell, Set<BoardCell>> adjMatrix = new HashMap<BoardCell, Set<BoardCell>>();
 	private Set<BoardCell> targets = new HashSet<BoardCell>();
 	private Set<BoardCell> visited = new HashSet<BoardCell>();
-	private Set<Person> suspects = new HashSet<People>();
+	private ArrayList<Player> suspects = new ArrayList<People>();
+	private Card theCard;
+
+
 	private String boardConfigFile;
 	private static Board theInstance = new Board(); // Singlton instance
 	boolean firstRun = true; // Variable used in calcTargets
@@ -391,21 +394,23 @@ public class Board
 	public void loadPersonConfig() throws BadConfigFormatException{
 	
 		try{
-			File file = new File("suspects.txt");
-			Scanner scanner = new Scanner(file);
-			while(scanner.hasNextLine())
-			{
-				String line = scanner.nextLine();
-				String[] elements = line.split(",");
+			// File file = new File("suspects.txt");
+			// Scanner scanner = new Scanner(file);
+			// while(scanner.hasNextLine())
+			// {
+			// 	String line = scanner.nextLine();
+			// 	String[] elements = line.split(",");
 
-				// Make temp person object
-				Person person;
-				// Parse the people
-				person.name = elements[0];
-				person.color = elements[1];
+			// 	// Make temp person object
+			// 	Person person;
+			// 	// Parse the people
+			// 	person.name = elements[0];
+			// 	person.color = elements[1];
+				// person.row = elements[2];
+				// person.column = elements[3];
 
-				// Add person object to global list of suspects
-				suspects.put(person);
+			// 	// Add person object to global list of suspects
+			// 	suspects.add(person);
 
 
 

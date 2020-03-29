@@ -1,8 +1,0 @@
-Colonel Mustard, Blue,
-Professor Plum, Red,
-Mr.Green, Yellow,
-Mrs.Peacock, Green,
-Miss.Scarlet, Purple,
-Mrs.White, Orange,
-Rusty, Black,
-Mrs.Meadow-Brook, Pink,
