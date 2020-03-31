@@ -1,0 +1,383 @@
+Pair programmed over teamviewer so only one persons commit messages
+
+commit 7af94a890b606ce9fec2449d4241a67d33230f34
+Author: Christian Prather <clemsbach@gmail.com>
+Date:   Mon Mar 30 21:18:54 2020 -0600
+
+    Full passing Tests
+
+commit e60578d89d2b2676067001fb78b43e7783641017
+Author: Christian Prather <clemsbach@gmail.com>
+Date:   Sun Mar 29 17:18:06 2020 -0600
+
+    Two tests passing
+
+commit 4140e61b32f288dd4ed881933cfc13282d29ede2
+Author: Christian Prather <clemsbach@gmail.com>
+Date:   Sun Mar 29 15:43:31 2020 -0600
+
+    All tests failing
+
+commit a44df1a300336519a43adda7e29fb9f877fba038
+Author: Christian Prather <clemsbach@gmail.com>
+Date:   Sun Mar 29 11:57:08 2020 -0600
+
+    Added failing make card test
+
+commit 3b29fea534d65111baffdc0053150ebd272ef9dc
+Author: Christian Prather <clemsbach@gmail.com>
+Date:   Sun Mar 29 11:23:53 2020 -0600
+
+    Failing Load Player tests
+
+commit f95f0ed67331ae304afd227550bc87499b1c816c
+Author: Christian Prather <clemsbach@gmail.com>
+Date:   Sat Mar 28 20:31:07 2020 -0600
+
+    Started parsing player files
+
+commit aa33d9904c7ef6a62efe372f82a863ff55f01fd7
+Author: Christian Prather <clemsbach@gmail.com>
+Date:   Sat Mar 28 20:07:49 2020 -0600
+
+    Added class prototypes
+
+commit 19dd6f471359c1c619da626ccb73cfb58688cca9
+Author: Alex <alangfield@mymail.mines.edu>
+Date:   Fri Mar 13 23:37:19 2020 -0600
+
+    renamed
+
+commit 439013fbc415e9e3e998d64f2facdd8ed554c76c
+Author: Alex <alangfield@mymail.mines.edu>
+Date:   Fri Mar 13 23:36:10 2020 -0600
+
+    Renamed refactor file
+
+commit e8d4711e8f6f43a0f7793513869d3a179780dd0e
+Author: Alex <alangfield@mymail.mines.edu>
+Date:   Fri Mar 13 22:39:35 2020 -0600
+
+    updated the gitlog
+
+commit fd515d27fb6843dd9f66d73149825ab40a3faa9e
+Author: Christian Prather <clemsbach@gmail.com>
+Date:   Fri Mar 13 18:29:07 2020 -0600
+
+    Fixed merge conflict
+
+commit c2b359752f0fcb902c4a1af3a52a356bc6d43b93
+Merge: 4793420 44ed915
+Author: Christian Prather <clemsbach@gmail.com>
+Date:   Fri Mar 13 18:26:04 2020 -0600
+
+    Merge branch 'master' of https://github.com/Christian-Prather/Clue-Game
+
+commit 47934207839c43314b9f38891c09bf18b37e9b85
+Author: Christian Prather <clemsbach@gmail.com>
+Date:   Fri Mar 13 18:23:24 2020 -0600
+
+    Added before to refactor log
+
+commit fced886918d1219f0620e3c1d644b9e0107ba6f3
+Author: Christian Prather <clemsbach@gmail.com>
+Date:   Fri Mar 13 18:20:25 2020 -0600
+
+    Added reactor log file
+
+commit 3b6dc5228fe12d8e8240d04d97c4ad8142f91592
+Author: Christian Prather <clemsbach@gmail.com>
+Date:   Fri Mar 13 18:20:06 2020 -0600
+
+    Styling
+
+commit b21f6a48bc7326267f042b058d242c1bc85b25a9
+Author: Christian Prather <clemsbach@gmail.com>
+Date:   Fri Mar 13 18:16:59 2020 -0600
+
+    Only parsing File once
+
+commit 44ed91537002019cd9d34e2a326553751faf015b
+Author: Alex <alangfield@mymail.mines.edu>
+Date:   Fri Mar 13 14:58:34 2020 -0600
+
+    Gave code proper naming conventions
+
+commit a9bde5189c573c2cb281d0bf8e7ef972d376b5ac
+Author: Alex <alangfield@mymail.mines.edu>
+Date:   Fri Mar 13 14:22:09 2020 -0600
+
+    Cleaned up a try/catch exception
+
+commit 032d17e8037d9e3a3bf24f4085b8fbe04913db34
+Author: Alex <alangfield@mymail.mines.edu>
+Date:   Fri Mar 13 14:17:59 2020 -0600
+
+    Cleaned up code, and all whitespace, got rid of unnecessary debugging outputs
+
+commit d5f7b48fe528c92baf207bbe85a8fafcf1e7d5ab
+Author: Christian Prather <clemsbach@gmail.com>
+Date:   Fri Mar 13 11:15:06 2020 -0600
+
+    Reverted try catch
+
+commit 53c8060f188c43227a159af5b1db97dddc3f4a3e
+Author: Christian Prather <clemsbach@gmail.com>
+Date:   Fri Mar 13 10:58:02 2020 -0600
+
+    Refactor moved filenotfound catch around just file opening
+
+commit aa736ee35d5803499cc16ebc207c37c0397a11c1
+Author: Christian Prather <clemsbach@gmail.com>
+Date:   Fri Mar 13 10:51:54 2020 -0600
+
+    Fixed all tests issues
+
+commit 0ae8923c830850dac212e68b427fb77c0b846b08
+Author: Christian Prather <clemsbach@gmail.com>
+Date:   Thu Mar 12 13:32:19 2020 -0600
+
+    Added comments to Board.java
+
+commit b367a5e8dcfd0a70be1f6be98086aa96c225da9a
+Author: Christian Prather <clemsbach@gmail.com>
+Date:   Thu Mar 12 12:54:06 2020 -0600
+
+    Added code pdf
+
+commit bde5d5bae7ba5b7dcc022a4b9d2af509b569ea2b
+Author: Christian Prather <clemsbach@gmail.com>
+Date:   Mon Mar 9 11:45:40 2020 -0600
+
+    Fully working tests
+
+commit 4fb887ae96ac8908fbbd13d7c6ff09b5ff4b0010
+Author: Christian Prather <clemsbach@gmail.com>
+Date:   Sun Mar 8 21:15:54 2020 -0600
+
+    All test pass
+
+commit 58e83d6d2064539580b6cb08cdfafc37f3cd28db
+Author: Christian Prather <clemsbach@gmail.com>
+Date:   Sun Mar 8 20:52:43 2020 -0600
+
+    All but one test passing
+
+commit 7ab686351b00a75cc9b69b98501fc029aab7d5d8
+Author: Christian Prather <clemsbach@gmail.com>
+Date:   Sun Mar 8 20:12:44 2020 -0600
+
+    Final target calc
+
+commit 12311c8756eb2252542827e40bd3b72791d4cad2
+Author: Christian Prather <clemsbach@gmail.com>
+Date:   Sun Mar 8 20:03:14 2020 -0600
+
+    Fixed targets again
+
+commit 11763fab45eca9d7cf5efa212525fe829e41fd5b
+Author: Christian Prather <clemsbach@gmail.com>
+Date:   Sun Mar 8 19:58:52 2020 -0600
+
+    Fix clearing of targets
+
+commit c0627e998d86d32afb379f406a2dd7630055707a
+Merge: 945b155 d3c1972
+Author: Christian Prather <clemsbach@gmail.com>
+Date:   Sun Mar 8 19:07:38 2020 -0600
+
+    Merge branch 'master' of https://github.com/Christian-Prather/Clue-Game
+
+commit 945b15545386171cb2fdac15c43a9894102614b5
+Author: Christian Prather <clemsbach@gmail.com>
+Date:   Sun Mar 8 19:07:24 2020 -0600
+
+    Test walkway working
+
+commit d3c19727ba4a19b813144b6bdfbf9d0912fc0acd
+Author: Alex <alangfield@mymail.mines.edu>
+Date:   Sun Mar 8 19:06:45 2020 -0600
+
+    updated edge case if board cell is null
+
+commit 055aa88fccbda8fbe9f859c90e851adb817960d4
+Author: Christian Prather <clemsbach@gmail.com>
+Date:   Sun Mar 8 18:57:22 2020 -0600
+
+    Most of target tests are passing
+
+commit ab358d636c7d4fd1f242bd89059e5e9eb32f5c86
+Author: Christian Prather <clemsbach@gmail.com>
+Date:   Wed Mar 4 18:47:13 2020 -0700
+
+    All the Adj checks working
+
+commit 1e5c5d5616ab607554be4ff1bd1b240e04e71a71
+Author: Christian Prather <clemsbach@gmail.com>
+Date:   Wed Mar 4 18:32:13 2020 -0700
+
+    Method of checking that only adj is a door if currently in  room
+
+commit ac042bea6401e98996bbc28956549bfe19310863
+Author: Christian Prather <clemsbach@gmail.com>
+Date:   Wed Mar 4 18:02:30 2020 -0700
+
+    Detection of room working
+
+commit 903446c364f5c8c86ab38931e6789a7aa4215dfc
+Author: Christian Prather <clemsbach@gmail.com>
+Date:   Wed Mar 4 17:51:16 2020 -0700
+
+    Old adj logic working
+
+commit ba668ec8ccac340a1c8adabc8fca1389966a687d
+Author: Christian Prather <clemsbach@gmail.com>
+Date:   Wed Mar 4 17:14:26 2020 -0700
+
+    Added in old adj calculations
+
+commit cb2bc5dc17730da0308d12ddfe5031dc8a51fd7f
+Author: Alex <alangfield@mymail.mines.edu>
+Date:   Sun Mar 1 21:31:30 2020 -0700
+
+    adding new excel spreadsheet
+
+commit 93f2c638f5ae962b70a8aa212332728541929ba7
+Author: Christian Prather <Clemsbach@gmail.com>
+Date:   Sun Mar 1 20:59:19 2020 -0700
+
+    Adj and Target Fails
+
+commit 9eb98b9af6059f349f8a52331c219ec7bc7f77d3
+Author: Alex <alangfield@mymail.mines.edu>
+Date:   Fri Feb 28 22:19:23 2020 -0700
+
+    Tests Pass Finally
+
+commit 083705ec3ed899f6e3adeebad7448a1277c76ba7
+Merge: d56e5b6 b36b1b7
+Author: Alex Langfield <alexlangfield@csm-wl-dhcp-202-139.mines.edu>
+Date:   Fri Feb 28 19:31:21 2020 -0700
+
+    Merge branch 'master' of https://github.com/Christian-Prather/Clue-Game
+
+commit d56e5b63011307810487dd02d5fd61ba877aa531
+Author: Alex Langfield <alexlangfield@csm-wl-dhcp-202-139.mines.edu>
+Date:   Fri Feb 28 19:25:58 2020 -0700
+
+    fixed test names
+
+commit b36b1b79dab2ab96df3c141e08d9f6db3eb43626
+Author: Christian Prather <Clemsbach@gmail.com>
+Date:   Fri Feb 28 19:11:45 2020 -0700
+
+    Changed Rows columns to be used like the class convention
+
+commit b1908d1d40edd2b87880aee8b464390ef27c7c09
+Author: Christian Prather <Clemsbach@gmail.com>
+Date:   Thu Feb 27 21:26:37 2020 -0700
+
+    Tests pass except for initial
+
+commit 44e4d442cef5868abc3ff6e969abde1f81ddd02b
+Author: Christian Prather <Clemsbach@gmail.com>
+Date:   Thu Feb 27 13:43:59 2020 -0700
+
+    Failed Test Submission
+
+commit e937cf28d4ec75b490f9e2db8823b1a7e0658804
+Author: Christian Prather <Clemsbach@gmail.com>
+Date:   Tue Feb 25 13:49:11 2020 -0700
+
+    Added start of tests
+
+commit 32c4e699821c3f965db54b3a9ad88341c3f35b25
+Author: Alex Langfield <alexlangfield@csm-wl-dhcp-195-104.mines.edu>
+Date:   Tue Feb 25 13:39:55 2020 -0700
+
+    Pushing txt files for legend and board.
+
+commit c1675575513ab14a0df16aab14dd111f27510780
+Author: Christian Prather <Clemsbach@gmail.com>
+Date:   Tue Feb 25 13:34:16 2020 -0700
+
+    Added skeletons for classes
+
+commit f8bef500969402adf77fab4bd1d1783da71c143b
+Author: Christian Prather <Clemsbach@gmail.com>
+Date:   Tue Feb 25 13:01:22 2020 -0700
+
+    Restructured folders
+
+commit e267c8f6911a49979a74da2a1bc46020d5c46f10
+Author: Alex Langfield <alexlangfield@Alexs-MacBook-Pro-5.local>
+Date:   Mon Feb 24 20:43:29 2020 -0700
+
+    pushing zipped file containing passed and failing tests
+
+commit e155f8e9ef92ee3909ec60ef950f27f6dfe7239d
+Merge: 6d3675c edbb53e
+Author: Christian Prather <Clemsbach@gmail.com>
+Date:   Mon Feb 24 20:27:16 2020 -0700
+
+    Merge branch 'master' of https://github.com/Christian-Prather/Clue-Game
+
+commit 6d3675c51165d0e17b67464c524703ba2feba1bd
+Author: Christian Prather <Clemsbach@gmail.com>
+Date:   Mon Feb 24 19:53:03 2020 -0700
+
+    Added failed zip
+
+commit edbb53e5ad09761947ba840cd9697867a7e82233
+Author: Alex Langfield <alexlangfield@csm-wl-dhcp-206-22.mines.edu>
+Date:   Mon Feb 24 19:47:41 2020 -0700
+
+    Tests finally passed
+
+commit 058b49908e744f973c63255206951b3e328b2f07
+Author: Christian Prather <Clemsbach@gmail.com>
+Date:   Mon Feb 24 18:49:01 2020 -0700
+
+    Passed Adjacency Tests!
+
+commit 435bb3e0e7b282df3369a5a2372a7eaf5521ab72
+Author: Christian Prather <Clemsbach@gmail.com>
+Date:   Mon Feb 24 18:08:26 2020 -0700
+
+    IDK this is acting wierd
+
+commit f4baefdcbb77e5c60ee7416e42944bcaf498cdfa
+Author: Christian Prather <Clemsbach@gmail.com>
+Date:   Mon Feb 24 17:11:18 2020 -0700
+
+    Issue with tests
+
+commit e550d8821898bc9c73f314710b81108c22b92b63
+Author: Christian Prather <Clemsbach@gmail.com>
+Date:   Sun Feb 23 20:35:03 2020 -0700
+
+    Adjacencies calculations are working
+
+commit 2263c73fc6435a56db27da624e0c41eb4ddf07a4
+Author: Christian Prather <Clemsbach@gmail.com>
+Date:   Sun Feb 23 19:16:24 2020 -0700
+
+    This is ready for failed test submission
+
+commit 9e7bc07b8dfbc45345f0b27bc1b84d8efb549bcb
+Author: Christian Prather <Clemsbach@gmail.com>
+Date:   Sun Feb 23 18:48:48 2020 -0700
+
+    First run of failing tests (need to add actuall logic)
+
+commit c2318a1fa3becb2ae5918d190a17a0bc22935f9d
+Author: Alex Langfield <alexlangfield@csm-wl-dhcp-206-22.mines.edu>
+Date:   Sun Feb 23 18:32:20 2020 -0700
+
+    adding IntBoard java class
+
+commit 9bf29a38ac73662d331d41cf13ec8ef76857f813
+Author: Alex Langfield <alexlangfield@csm-wl-dhcp-206-22.mines.edu>
+Date:   Thu Feb 20 13:49:25 2020 -0700
+
+    Intital Pass

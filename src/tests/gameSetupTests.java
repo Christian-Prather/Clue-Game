@@ -32,38 +32,44 @@ public class gameSetupTests
         // Load the player config file
        
 		board.loadPersonConfig();
-        board.makeCards();
-        board.dealCards();
+
 
     }
-
+    //Calls board object to make a deck of cards, and deal the deck of cards
+    //to each of the players in suspects array list
     @Before
     public void before()
     {
     	//board.deck;
+        board.makeCards();
+        board.dealCards();
     }
 
-
+    //test for first, fourth, and last players names, locations on board, and colors
+    //are valid.
     @Test 
     public void testLoadPlayers()
     {
         Player firstPlayer = board.suspects.get(0);
+        //check name validity
         assertEquals("Colonel Mustard", firstPlayer.getPlayerName());
+        //check color validity
         assertEquals(Color.blue, firstPlayer.getPlayerColor());
-        assertEquals(10, firstPlayer.getPlayerRow());
-        assertEquals(12, firstPlayer.getPlayerColumn());
+        //check player location on board validity
+        assertEquals(2, firstPlayer.getPlayerRow());
+        assertEquals(2, firstPlayer.getPlayerColumn());
 
         Player fourthPlayer = board.suspects.get(3);
         assertEquals("Mrs.Peacock", fourthPlayer.getPlayerName());
         assertEquals(Color.green, fourthPlayer.getPlayerColor());
-        assertEquals(15, fourthPlayer.getPlayerRow());
-        assertEquals(3, fourthPlayer.getPlayerColumn());
+        assertEquals(13, fourthPlayer.getPlayerRow());
+        assertEquals(2, fourthPlayer.getPlayerColumn());
 
         Player lastPlayer = board.suspects.get(board.suspects.size() -1 );
         assertEquals("Mrs.Meadow-Brook", lastPlayer.getPlayerName());
         assertEquals(Color.pink, lastPlayer.getPlayerColor());
-        assertEquals(12, lastPlayer.getPlayerRow());
-        assertEquals(16, lastPlayer.getPlayerColumn());
+        assertEquals(2, lastPlayer.getPlayerRow());
+        assertEquals(20, lastPlayer.getPlayerColumn());
 
     }
 
@@ -120,7 +126,6 @@ public class gameSetupTests
             System.out.println("Key = " + eachPlayer.getKey() + ", value = " + eachPlayer.getValue());
             if(eachPlayer.getValue().size() < 3) {
             	thingy = true;
-     
             }
            
         }
@@ -128,9 +133,11 @@ public class gameSetupTests
         // no player should have the same card.
         
     	boolean thingy2 = true;
-        // each player should have no more than 3 cards, and no less than 2 cards
+        //for loop designed to deal the cards to each player, at this point the
+    	//cards have already been shuffled and are dealt one by one to each
+    	//player in the deck evenly, making sure no player is dealt duplicates
         for(Map.Entry<Player, ArrayList<Card>> eachPlayer : board.playerCards.entrySet()){
-            System.out.println("Key = " + eachPlayer.getKey() + ", value = " + eachPlayer.getValue());
+            //System.out.println("Key = " + eachPlayer.getKey() + ", value = " + eachPlayer.getValue());
             HashSet<String> totalCards = new HashSet<String>();
             for (Card card : eachPlayer.getValue())
             {

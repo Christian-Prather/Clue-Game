@@ -471,26 +471,22 @@ public class Board
 	}
 		
 
-	// Not sure how we are suppose to be doing this?
+	//Method designed to parse the txt files for all weapons, people, and rooms
+	//and creates a deck of cards combining the total number from each file.
 	public void makeCards()
 	{
+		deck.clear();
 		// Loop through every cell in board if room make room card
-		 System.out.println("ROOOOM" + rooms.size());
-
 		for (String room : rooms)
 		{
-			
 			Card roomCard = new Card();
 			roomCard.setCardName(room);
 			roomCard.setCardType(CardType.ROOM);
 			deck.add(roomCard);
 		}
-		
 		// Loop through every Player make a player card
 		for (Player player : suspects)
 		{
-			System.out.println("SUS" + suspects.size());
-
 			Card playerCard = new Card();
 			playerCard.setCardName(player.getPlayerName());
 			playerCard.setCardType(CardType.PERSON);
@@ -499,7 +495,7 @@ public class Board
 		// Loop though every weapon file and make a weapon card
 		File file;
 		Scanner scanner;
-	
+		//parsing weapons file to access only the information needed
 		try
 		{
 			file = new File("weapons.txt");
@@ -522,25 +518,23 @@ public class Board
 		}
 	}
 
-	// Not sure how we are suppose to be doing this?
-
 	// A b c d e f g h
 	// 1 1 1 1 1 1 1 1 
 	// 1 1 1 1 1 1 1 1 
-	//
+
 	public void dealCards()
 	{
+		 //"Shuffle" or randomize the entries in the deck of cards
 		 Collections.shuffle(deck);
-		 for (Card card : deck)
-		 {
-			 System.out.println(card.getCardName());
-		 }
+		 //while loop that gives a card to each person until all cards have been
+		 //dealt
 		 while (counter < deck.size())
 		 {
 			 // Deal a card deck[counter]
 			 for (Player player : suspects)
 			 {
 				 ArrayList<Card> currentHand = playerCards.get(player);
+				 //initial run needs allocated memory or array returns null
 				 if (currentHand == null)
 				 {
 					 currentHand = new ArrayList<Card>();
@@ -554,21 +548,11 @@ public class Board
 					 break;
 				 }
 			 }
+			 //used for testing to see if each person has the correct number of cards
 			 for(Map.Entry<Player, ArrayList<Card>> eachPlayer : playerCards.entrySet()){
-		            System.out.println("Key = " + eachPlayer.getKey() + ", value = " + eachPlayer.getValue());
-		         	           
+		            System.out.println("Key = " + eachPlayer.getKey() + ", value = " + eachPlayer.getValue());           
 		     }
-
 		 }
-		 
-
-		 int index = 0;
-		 int newIndex = 0;
-//		 while(deck.size() != 0){
-////		 	playerCards.put(person[newIndex], deck.at(0));
-////		 	deck.remove(index);
-////		 	newIndex++;
-//		 }
 	}
 
 	public void selectAnswer()
