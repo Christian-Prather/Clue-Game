@@ -112,7 +112,7 @@ public class gameSetupTests
     public void dealingCardsTest()
     {
     	// Test all cards were dealt
-    	assertEquals(0, board.deck.size());
+    	assertEquals(board.counter, board.deck.size());
         // Each player should have roughly the same number of cards
     	boolean thingy = false;
         // each player should have no more than 3 cards, and no less than 2 cards

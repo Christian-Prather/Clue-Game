@@ -38,6 +38,7 @@ public class Board
 	public ArrayList<Card> deck = new ArrayList<Card>();
 	public ArrayList<String> rooms = new ArrayList<String>();
 	public Map<Player, ArrayList<Card>> playerCards = new HashMap<Player, ArrayList<Card>>();
+	public int counter = 0;
 
 	private Card theCard;
 
@@ -526,6 +527,7 @@ public class Board
 	// A b c d e f g h
 	// 1 1 1 1 1 1 1 1 
 	// 1 1 1 1 1 1 1 1 
+	//
 	public void dealCards()
 	{
 		 Collections.shuffle(deck);
@@ -533,6 +535,33 @@ public class Board
 		 {
 			 System.out.println(card.getCardName());
 		 }
+		 while (counter < deck.size())
+		 {
+			 // Deal a card deck[counter]
+			 for (Player player : suspects)
+			 {
+				 ArrayList<Card> currentHand = playerCards.get(player);
+				 if (currentHand == null)
+				 {
+					 currentHand = new ArrayList<Card>();
+				 }
+				 currentHand.add(deck.get(counter));
+
+				 playerCards.put(player, currentHand);
+				 counter++;
+				 if (counter == deck.size())
+				 {
+					 break;
+				 }
+			 }
+			 for(Map.Entry<Player, ArrayList<Card>> eachPlayer : playerCards.entrySet()){
+		            System.out.println("Key = " + eachPlayer.getKey() + ", value = " + eachPlayer.getValue());
+		         	           
+		     }
+
+		 }
+		 
+
 		 int index = 0;
 		 int newIndex = 0;
 //		 while(deck.size() != 0){
