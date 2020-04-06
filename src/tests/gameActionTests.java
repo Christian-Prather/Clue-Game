@@ -17,6 +17,7 @@ import org.junit.Test;
 
 import clueGame.BadConfigFormatException;
 import clueGame.Board;
+import clueGame.BoardCell;
 import clueGame.Card;
 import clueGame.CardType;
 import clueGame.ComputerPlayer;
@@ -145,14 +146,36 @@ public class gameActionTests {
 	}
 	public void createSuggestion() {
 		ComputerPlayer player = new ComputerPlayer();
-		java.awt.Point location = new Point(9,19);
-		player.setLocation(location);
-		player.setCurrentRoom("Dining Room");
-		Card mustardCard = new Card("Colonel Mustard", Card.PERSON);
-		Card knifeCard = new Card ("Knife", Card.cardType.WEAPON);
-		Card libraryCard = new Card("Library", Card.cardType.ROOM);
-		player.updateSeen(mustardCard);
-		player.updateSeen(knifeCard);
-		player.updateSeen(libraryCard);
+		//java.awt.Point location = new Point(9,19);
+		//player.setLocation(location);
+		player.setRow(9);
+		player.setColumn(19);
+		BoardCell playerSpot = board.getCellAt(player.getPlayerRow(), player.getPlayerColumn());
+		Map<Character, String> legend = board.getLegend();
+		String roomName = legend.get(playerSpot.getInitial());
+
+		// Reduce weapon and people to only one possible each
+		Card firstWeapon = board.weaponsNotGuessed.get(0);
+		Card firstPerson = board.peopleNotGuessed.get(0);
+
+		ArrayList<Card> limitedWeapons = new ArrayList<Card>();
+		ArrayList<Card> limitedPeople = new ArrayList<Card>();
+		limitedWeapons.add(firstWeapon);
+		limitedPeople.add(firstPerson);
+
+		board.weaponsNotGuessed = limitedWeapons;
+		board.peopleNotGuessed = limitedPeople;
+
+
+		Solution playerSuggestion = player.createSuggestion();
+		// Check the suggestion room is the room player is currently in
+		assertEquals(playerSuggestion.room.getCardName(), roomName);
+		
+		// Check its the only possible person
+		assertTrue(playerSuggestion.person.equals(firstPerson));
+
+		// Check its the only possible weapon
+		assertTrue(playerSuggestion.weapon.equals(firstWeapon));
+	
 	}
 }

@@ -37,6 +37,11 @@ public class Board
 
 	public ArrayList<Card> deck = new ArrayList<Card>();
 	public ArrayList<String> rooms = new ArrayList<String>();
+	
+	public ArrayList<Card> roomsNotGuessed =  new ArrayList<Card>();
+	public ArrayList<Card> weaponsNotGuessed = new ArrayList<Card>();
+	public ArrayList<Card> peopleNotGuessed =  new ArrayList<Card>();
+	
 //	public Map<Player, ArrayList<Card>> playerCards = new HashMap<Player, ArrayList<Card>>();
 	
 	private Solution answer;
@@ -68,6 +73,16 @@ public class Board
 			e.printStackTrace();
 		} 
 		calcAdjacencies();
+		try {
+			loadPersonConfig();
+		} catch (BadConfigFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		makeCards();
+		dealCards();
+
+	
 	
 	}
 
@@ -478,13 +493,16 @@ public class Board
 	public void makeCards()
 	{
 		deck.clear();
-		// Loop through every cell in board if room make room card
+		// Loop through every cell in board is room make room card
 		for (String room : rooms)
 		{
 			Card roomCard = new Card();
 			roomCard.setCardName(room);
 			roomCard.setCardType(CardType.ROOM);
 			deck.add(roomCard);
+			// Used for guessing
+			roomsNotGuessed.add(roomCard);
+
 		}
 		// Loop through every Player make a player card
 		for (Player player : suspects)
@@ -493,6 +511,8 @@ public class Board
 			playerCard.setCardName(player.getPlayerName());
 			playerCard.setCardType(CardType.PERSON);
 			deck.add(playerCard);
+			// Used for guessing
+			peopleNotGuessed.add(playerCard);
 		}
 		// Loop though every weapon file and make a weapon card
 		File file;
@@ -511,6 +531,8 @@ public class Board
 				weaponCard.setCardName(elements[0]);
 				weaponCard.setCardType(CardType.WEAPON);
 				deck.add(weaponCard);
+				// Used for guessing
+				weaponsNotGuessed.add(weaponCard);
 
 			}
 		}
@@ -578,32 +600,5 @@ public class Board
 		return answer.person.equals(accusation.person) && answer.room.equals(accusation.room) && answer.weapon.equals(accusation.weapon);
 
 	}
-	
-	// public Card disproveSuggestion(Solution suggestion) 
-	// {
-	// 	int matchingCards = 0;
-	// 	Card match = null;
-		
-	// 	for (Map.Entry<Player,ArrayList<Card>> entry : playerCards.entrySet())  
-	// 	{
-	// 		System.out.println("Key = " + entry.getKey() +  ", Value = " + entry.getValue()); 
-	// 		ArrayList<Card> currentHand = entry.getValue();
-	// 		for (Card potential : currentHand)
-	// 		{
-	// 			if (potential == suggestion.person || potential == suggestion.room  || potential == suggestion.weapon)
-	// 			{
-	// 				// We have a person from suggestion
-	// 				matchingCards++;
-	// 				match = potential;
-	// 				break;
-	// 			}
-								
-	// 		}
-
-	// 	}
-
-	// 	return match;
-	// }
-	
 
 }
