@@ -42,6 +42,7 @@ public class ComputerPlayer extends Player
 		thing = board.weaponsNotGuessed.get(rand.nextInt(board.weaponsNotGuessed.size()));
 
         Solution newSuggestion = new Solution(person, place, thing);
+        super.playerSuggestion = newSuggestion;
         return newSuggestion;
     };
 }

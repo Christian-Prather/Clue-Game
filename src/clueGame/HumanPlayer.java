@@ -1,5 +1,7 @@
 package clueGame;
 
+import java.util.ArrayList;
+
 public class HumanPlayer extends Player 
 {
 	public HumanPlayer() {
@@ -10,4 +12,9 @@ public class HumanPlayer extends Player
 		super();
 
 	}
+
+//	public static void setCards(ArrayList<Card> suggestions) {
+//		// TODO Auto-generated method stub
+//		
+//	}
 }

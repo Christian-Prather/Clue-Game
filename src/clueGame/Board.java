@@ -582,16 +582,37 @@ public class Board
 
 	public void selectAnswer()
 	{
-
+		
 	}
 
 	public void  setAnswer(Solution answer)
 	{
 		this.answer = answer;
 	}
-	public Card handleSuggestion()
+	
+	public Card handleSuggestion(Solution suggestion, Player playerMadeSuggestion)
 	{
-		return null;
+		// suggestions has a player card, a weapon card, room card
+		
+		Card returnedCard = null;
+		for (Player player : suspects)
+		{
+			// Dont check the players cards who suggested it
+			if(playerMadeSuggestion.equals(player))
+			{
+				continue;
+			}
+			// Check each player
+			returnedCard = player.disproveSuggestion(suggestion);
+			if (returnedCard != null)
+			{
+				// Found a matching card 
+				return returnedCard;
+				
+			}
+		}
+		
+		return returnedCard;
 
 	}
 
@@ -600,5 +621,6 @@ public class Board
 		return answer.person.equals(accusation.person) && answer.room.equals(accusation.room) && answer.weapon.equals(accusation.weapon);
 
 	}
+	
 
 }

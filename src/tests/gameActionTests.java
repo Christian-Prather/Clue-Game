@@ -97,7 +97,7 @@ public class gameActionTests {
 		guess = new Solution(mustard, library, horseshoe);
 		assertFalse(board.checkAccusation(guess));
 		//wrong person
-		guess = new Solution(peacock, library, horseshoe);
+		guess = new Solution(peacock, library, hammer);
 		assertFalse(board.checkAccusation(guess));
 	}
 	@Test
@@ -142,14 +142,42 @@ public class gameActionTests {
 	}
 	@Test
 	public void handleSuggestionTest() {
+//		HumanPlayer.setCards(null);
+//		board.
+//		suggestion = new ("Professor Plum", "HorseShoe", "Sexyroom");
+//		
+		Solution suggestion = new Solution(peacock, library, horseshoe);
+		
+		ComputerPlayer computer1 = new ComputerPlayer();
+		HumanPlayer human = new HumanPlayer();
+				
+		// Comp 1 get professor Plum
+		computer1.addCard(peacock);
+		// Comp 2 gets gnome weapon
+		computer1.addCard(library);
+		// Human gets observatory card
+		human.addCard(horseshoe);	
+			
+		// Set suspects to only be the two players
+		board.suspects.clear();
+		board.suspects.add(computer1);
+		board.suspects.add(human);
+		// Have Computer 1 make the suggestion so human should return horseshoe
+		assertEquals(board.handleSuggestion(suggestion, computer1), horseshoe);
+		
+		// Clear all human cards
+		human.clearHand();
+		// No conflic should be null
+		assertEquals(human.disproveSuggestion(suggestion), null);
 		
 	}
+	@Test
 	public void createSuggestion() {
 		ComputerPlayer player = new ComputerPlayer();
 		//java.awt.Point location = new Point(9,19);
 		//player.setLocation(location);
-		player.setRow(9);
-		player.setColumn(19);
+		player.setRow(12);
+		player.setColumn(1);
 		BoardCell playerSpot = board.getCellAt(player.getPlayerRow(), player.getPlayerColumn());
 		Map<Character, String> legend = board.getLegend();
 		String roomName = legend.get(playerSpot.getInitial());
@@ -169,6 +197,8 @@ public class gameActionTests {
 
 		Solution playerSuggestion = player.createSuggestion();
 		// Check the suggestion room is the room player is currently in
+		System.out.println(roomName);
+		System.out.println("ROOM" + playerSuggestion.room.getCardName());
 		assertEquals(playerSuggestion.room.getCardName(), roomName);
 		
 		// Check its the only possible person

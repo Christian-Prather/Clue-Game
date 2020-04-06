@@ -14,6 +14,7 @@ public class Player
     private int column;
     private Color color;
     private ArrayList <Card> playerHand = new ArrayList<Card>();
+    public Solution playerSuggestion;
    public Card disproveSuggestion(Solution suggestion) 
    {
      int matchingCards = 0;
@@ -79,5 +80,9 @@ public class Player
     public ArrayList<Card> getPlayerHand()
     {
       return playerHand;
+    }
+    public void clearHand()
+    {
+    	playerHand.clear();
     }
 }
