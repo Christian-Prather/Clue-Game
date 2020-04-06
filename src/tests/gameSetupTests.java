@@ -122,24 +122,35 @@ public class gameSetupTests
         // Each player should have roughly the same number of cards
     	boolean thingy = false;
         // each player should have no more than 3 cards, and no less than 2 cards
-        for(Map.Entry<Player, ArrayList<Card>> eachPlayer : board.playerCards.entrySet()){
-            System.out.println("Key = " + eachPlayer.getKey() + ", value = " + eachPlayer.getValue());
-            if(eachPlayer.getValue().size() < 3) {
-            	thingy = true;
+        for (Player player : board.suspects)
+        {
+            if (player.getHandSize() < 3)
+            {
+                thingy = true;
             }
-           
         }
+        // for(Map.Entry<Player, ArrayList<Card>> eachPlayer : board.playerCards.entrySet()){
+        //     System.out.println("Key = " + eachPlayer.getKey() + ", value = " + eachPlayer.getValue());
+        //     if(eachPlayer.getValue().size() < 3) {
+        //     	thingy = true;
+        //     }
+           
+        //}
         assertTrue(thingy);
         // no player should have the same card.
         
     	boolean thingy2 = true;
         //for loop designed to deal the cards to each player, at this point the
     	//cards have already been shuffled and are dealt one by one to each
-    	//player in the deck evenly, making sure no player is dealt duplicates
-        for(Map.Entry<Player, ArrayList<Card>> eachPlayer : board.playerCards.entrySet()){
+        //player in the deck evenly, making sure no player is dealt duplicates
+        
+        for (Player player : board.suspects)
+        {
+        // for(Map.Entry<Player, ArrayList<Card>> eachPlayer : board.playerCards.entrySet()){
             //System.out.println("Key = " + eachPlayer.getKey() + ", value = " + eachPlayer.getValue());
             HashSet<String> totalCards = new HashSet<String>();
-            for (Card card : eachPlayer.getValue())
+            ArrayList <Card> playersHand = player.getPlayerHand();
+            for (Card card : playersHand)
             {
             	for(String eachCard : totalCards) {
             		if(eachCard == card.getCardName()) {

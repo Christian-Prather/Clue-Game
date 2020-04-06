@@ -37,7 +37,9 @@ public class Board
 
 	public ArrayList<Card> deck = new ArrayList<Card>();
 	public ArrayList<String> rooms = new ArrayList<String>();
-	public Map<Player, ArrayList<Card>> playerCards = new HashMap<Player, ArrayList<Card>>();
+//	public Map<Player, ArrayList<Card>> playerCards = new HashMap<Player, ArrayList<Card>>();
+	
+	private Solution answer;
 	public int counter = 0;
 
 	private Card theCard;
@@ -533,25 +535,26 @@ public class Board
 			 // Deal a card deck[counter]
 			 for (Player player : suspects)
 			 {
-				 ArrayList<Card> currentHand = playerCards.get(player);
-				 //initial run needs allocated memory or array returns null
-				 if (currentHand == null)
-				 {
-					 currentHand = new ArrayList<Card>();
-				 }
-				 currentHand.add(deck.get(counter));
+				//  ArrayList<Card> currentHand = playerCards.get(player);
+				//  //initial run needs allocated memory or array returns null
+				//  if (currentHand == null)
+				//  {
+				// 	 currentHand = new ArrayList<Card>();
+				//  }
+				// currentHand.add(deck.get(counter));
+				player.addCard(deck.get(counter));
 
-				 playerCards.put(player, currentHand);
+				 //playerCards.put(player, currentHand);
 				 counter++;
 				 if (counter == deck.size())
 				 {
 					 break;
 				 }
 			 }
-			 //used for testing to see if each person has the correct number of cards
-			 for(Map.Entry<Player, ArrayList<Card>> eachPlayer : playerCards.entrySet()){
-		            System.out.println("Key = " + eachPlayer.getKey() + ", value = " + eachPlayer.getValue());           
-		     }
+			//  //used for testing to see if each person has the correct number of cards
+			//  for(Map.Entry<Player, ArrayList<Card>> eachPlayer : playerCards.entrySet()){
+		    //         System.out.println("Key = " + eachPlayer.getKey() + ", value = " + eachPlayer.getValue());           
+		    //  }
 		 }
 	}
 
@@ -560,6 +563,10 @@ public class Board
 
 	}
 
+	public void  setAnswer(Solution answer)
+	{
+		this.answer = answer;
+	}
 	public Card handleSuggestion()
 	{
 		return null;
@@ -568,9 +575,35 @@ public class Board
 
 	public boolean checkAccusation(Solution accusation)
 	{
-		return false;
+		return answer.person.equals(accusation.person) && answer.room.equals(accusation.room) && answer.weapon.equals(accusation.weapon);
 
 	}
+	
+	// public Card disproveSuggestion(Solution suggestion) 
+	// {
+	// 	int matchingCards = 0;
+	// 	Card match = null;
+		
+	// 	for (Map.Entry<Player,ArrayList<Card>> entry : playerCards.entrySet())  
+	// 	{
+	// 		System.out.println("Key = " + entry.getKey() +  ", Value = " + entry.getValue()); 
+	// 		ArrayList<Card> currentHand = entry.getValue();
+	// 		for (Card potential : currentHand)
+	// 		{
+	// 			if (potential == suggestion.person || potential == suggestion.room  || potential == suggestion.weapon)
+	// 			{
+	// 				// We have a person from suggestion
+	// 				matchingCards++;
+	// 				match = potential;
+	// 				break;
+	// 			}
+								
+	// 		}
+
+	// 	}
+
+	// 	return match;
+	// }
 	
 
 }
