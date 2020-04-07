@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
@@ -26,10 +27,13 @@ public class ComputerPlayer extends Player
 		Card person = new Card();
 		Card thing = new Card();
 		// Get the right room card 
+	//	System.out.println("My room" + roomName);
 		for ( Card room : board.roomsNotGuessed)
 		{
-			if (room.getCardName().equals(roomName))
+		//	System.out.println(room.getCardName());
+			if (room.getCardName().strip().equals(roomName.strip()))
 			{
+			//	System.out.println("Found match");
 				place = room;
 			}
 		}
@@ -45,4 +49,34 @@ public class ComputerPlayer extends Player
         super.playerSuggestion = newSuggestion;
         return newSuggestion;
     };
+    
+    public BoardCell chooseTarget(Set<BoardCell> targets, Set<BoardCell> visited)
+    {
+        // Did not find a valid room so pick at random
+        if (targets.isEmpty())
+        {
+        	return null;
+        }
+        for (BoardCell target : targets)
+        {
+        	// Check to see if at door since its basically a room may need to change to be actual room 
+        	// later
+            if(target.isDoorway())
+            {
+            	System.out.println("Room");
+                // A target is a room so select it if not just visited
+                if (!visited.contains(target))
+                {
+                    return target;
+                }
+            }
+        }
+    
+        
+        Random rand = new Random();
+        ArrayList<BoardCell> arrayTargets = new ArrayList(targets);
+        BoardCell choice = arrayTargets.get(rand.nextInt(arrayTargets.size()));
+        return choice;
+        
+    }
 }

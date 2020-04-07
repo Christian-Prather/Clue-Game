@@ -622,5 +622,19 @@ public class Board
 
 	}
 	
+	public BoardCell computerDecision(ComputerPlayer computer)
+	{
+		calcAdjacencies();
+		
+		int path = 2;
+		System.out.println("Before " + targets.size());
+		BoardCell computerPlayerPos = getCellAt(computer.getPlayerRow(), computer.getPlayerColumn());
+		getAdjList(computerPlayerPos.row, computerPlayerPos.column);
+		calcTargets(computerPlayerPos.row, computerPlayerPos.column, path);
+		System.out.println("After " + targets.size());
+
+		
+		return computer.chooseTarget(getTargets(), visited);
+	}
 
 }

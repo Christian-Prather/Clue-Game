@@ -48,8 +48,6 @@ public class gameActionTests {
 		board.initialize();
 		//set up test game
 		board.makeCards();
-//		board.selectAnswer();
-//		board.dealCards();
 		
 		mustard = new Card();
 		mustard.setCardName("Colonel Mustard");
@@ -108,20 +106,6 @@ public class gameActionTests {
 		ComputerPlayer computer2 = new ComputerPlayer();
 		ComputerPlayer computer3 = new ComputerPlayer();
 		HumanPlayer human = new HumanPlayer();
-			
-//		ArrayList<ComputerPlayer> comps = new ArrayList<ComputerPlayer>();
-//
-//		Card professorPlum = new Card();
-//		professorPlum.setCardName("professorPlum");
-//		professorPlum.setCardType(CardType.PERSON);
-//		
-//		Card gnomeCard = new Card();
-//		gnomeCard.setCardName("gnomeCard");
-//		gnomeCard.setCardType(CardType.WEAPON);
-//		
-//		Card observatoryCard = new Card();
-//		observatoryCard.setCardName("observatoryCard");
-//		observatoryCard.setCardType(CardType.ROOM);
 		
 		// Comp 1 get professor Plum
 		computer1.addCard(peacock);
@@ -133,7 +117,6 @@ public class gameActionTests {
 		//Comp 3 doesnt get a card
 		
 				
-//		hand.add(professorPlum);
 		assertEquals(computer1.disproveSuggestion(suggestion), peacock);
 		assertEquals(human.disproveSuggestion(suggestion), horseshoe);
 		assertEquals(computer3.disproveSuggestion(suggestion), null);
@@ -142,10 +125,7 @@ public class gameActionTests {
 	}
 	@Test
 	public void handleSuggestionTest() {
-//		HumanPlayer.setCards(null);
-//		board.
-//		suggestion = new ("Professor Plum", "HorseShoe", "Sexyroom");
-//		
+
 		Solution suggestion = new Solution(peacock, library, horseshoe);
 		
 		ComputerPlayer computer1 = new ComputerPlayer();
@@ -172,7 +152,7 @@ public class gameActionTests {
 		
 	}
 	@Test
-	public void createSuggestion() {
+	public void createSuggestionTest() {
 		ComputerPlayer player = new ComputerPlayer();
 		//java.awt.Point location = new Point(9,19);
 		//player.setLocation(location);
@@ -197,9 +177,9 @@ public class gameActionTests {
 
 		Solution playerSuggestion = player.createSuggestion();
 		// Check the suggestion room is the room player is currently in
-		System.out.println(roomName);
-		System.out.println("ROOM" + playerSuggestion.room.getCardName());
-		assertEquals(playerSuggestion.room.getCardName(), roomName);
+		//System.out.println(roomName);
+		//System.out.println(playerSuggestion.room.getCardName());
+		assertEquals(playerSuggestion.room.getCardName().strip(), roomName.strip());
 		
 		// Check its the only possible person
 		assertTrue(playerSuggestion.person.equals(firstPerson));
@@ -208,4 +188,18 @@ public class gameActionTests {
 		assertTrue(playerSuggestion.weapon.equals(firstWeapon));
 	
 	}
+	
+	@Test
+	public void selectTargetTest()
+	{
+		ComputerPlayer player = new ComputerPlayer();
+		player.setRow(5);
+		player.setColumn(4);
+		// Place player 2 from a room door
+		BoardCell computerChoice = board.computerDecision(player);
+		System.out.println(computerChoice.row + " " + computerChoice.column);
+		assertEquals(computerChoice, board.getCellAt(4,3));
+		
+	}
+	
 }
